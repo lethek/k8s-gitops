@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - cert-manager.yaml
   - longhorn-system.yaml
+  - media.yaml
   - metallb-system.yaml
   - networking.yaml
