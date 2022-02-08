@@ -1,10 +1,27 @@
-# Template for deploying k3s backed by Flux
+<div align="center">
+<img src="https://camo.githubusercontent.com/5b298bf6b0596795602bd771c5bddbb963e83e0f/68747470733a2f2f692e696d6775722e636f6d2f7031527a586a512e706e67" align="center" width="144px" height="144px"/>
 
-Highly opinionated template for deploying a single [k3s](https://k3s.io) cluster with [Ansible](https://www.ansible.com) and [Terraform](https://www.terraform.io) backed by [Flux](https://toolkit.fluxcd.io/) and [SOPS](https://toolkit.fluxcd.io/guides/mozilla-sops/).
+### My home Kubernetes cluster :sailboat:
 
-The purpose here is to showcase how you can deploy an entire Kubernetes cluster and show it off to the world using the [GitOps](https://www.weave.works/blog/what-is-gitops-really) tool [Flux](https://toolkit.fluxcd.io/). When completed, your Git repository will be driving the state of your Kubernetes cluster. In addition with the help of the [Ansible](https://github.com/ansible-collections/community.sops), [Terraform](https://github.com/carlpett/terraform-provider-sops) and [Flux](https://toolkit.fluxcd.io/guides/mozilla-sops/) SOPS integrations you'll be able to commit Age encrypted secrets to your public repo.
+_... managed with Flux and Renovate_ :robot:
 
-## Overview
+</div>
+<br/>
+<div align="center">
+
+[![Discord](https://img.shields.io/discord/673534664354430999?style=for-the-badge&label=discord&logo=discord&logoColor=white)](https://discord.gg/k8s-at-home)
+[![K3S](https://img.shields.io/badge/k3s-v1.23.3-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
+[![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
+[![Lines of code](https://img.shields.io/tokei/lines/github/lethek/k8s-gitops?style=for-the-badge&color=brightgreen&label=lines&logo=codefactor&logoColor=white)](https://github.com/lethek/k8s-gitops/graphs/contributors)
+  
+</div>
+
+---
+
+## :book:&nbsp; Overview
+This is home to my personal Kubernetes cluster deployed with [Ansible](https://www.ansible.com) and [Terraform](https://www.terraform.io) backed by [Flux](https://toolkit.fluxcd.io/) and [SOPS](https://toolkit.fluxcd.io/guides/mozilla-sops/). [Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies.
+
+This repository is forked from the excellent [Kubernetes @Home template cluster](https://github.com/k8s-at-home/template-cluster-k3s).
 
 - [Introduction](https://github.com/k8s-at-home/template-cluster-k3s#wave-introduction)
 - [Prerequisites](https://github.com/k8s-at-home/template-cluster-k3s#memo-prerequisites)
@@ -322,4 +339,4 @@ If you plan on exposing your ingress to the world from your home. Checkout [our 
 
 ## :handshake:&nbsp; Thanks
 
-Big shout out to all the authors and contributors to the projects that we are using in this repository.
+Thanks to all the people who donate their time to the [Kubernetes @Home](https://github.com/k8s-at-home/) community. Big shout out to all the authors and contributors to the projects that we are using in this repository.
