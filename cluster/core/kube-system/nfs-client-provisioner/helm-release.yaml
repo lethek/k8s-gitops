@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-client-provisioner
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+      chart: nfs-subdir-external-provisioner
+      version: 4.0.14
+      sourceRef:
+        kind: HelmRepository
+        name: nfs-subdir-external-provisioner-charts
+        namespace: flux-system
+  values:
+    nfs:
+      server: ${SVC_NAS_ADDR}
+      path: "/volume1/hyde"
+      mountOptions:
+      - nfsvers=4.1
+      - tcp
+      - intr
+      - hard
+      - noatime
+      - nodiratime
+    storageClass:
+      defaultClass: false
+      archiveOnDelete: true
