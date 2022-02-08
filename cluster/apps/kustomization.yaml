@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - _pvc/nfs-media-shared-downloads-pvc.yaml
+  - _pvc/nfs-media-shared-videos-pvc.yaml
   - default
   - kube-system
   - media
