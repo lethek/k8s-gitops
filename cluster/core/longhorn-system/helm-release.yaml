@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.longhorn.io/
+      chart: longhorn
+      version: 1.2.3
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn-charts
+        namespace: flux-system
+  values:
+    csi:
+      kubeletRootDir: /var/lib/kubelet
+    persistence:
+      reclaimPolicy: Retain
+      defaultClassReplicaCount: 2
+    defaultSettings:
+      storageMinimalAvailablePercentage: 10
+      backupTarget: nfs://${SVC_NAS_ADDR}:/volume1/backups/longhorn
+      backupstorePollInterval: 1800
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      defaultDataLocality: best-effort
