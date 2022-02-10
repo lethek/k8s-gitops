@@ -32,8 +32,12 @@ metadata:
   name: nas
   namespace: home
   annotations:
-    kubernetes.io/ingress.class: traefik
+    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+       proxy_ssl_server_name on;
+       proxy_ssl_name nas.${SECRET_DOMAIN};
 spec:
   tls:
   - secretName: nas-tls
