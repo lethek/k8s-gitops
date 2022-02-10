@@ -170,6 +170,7 @@ verify_metallb() {
     local ip_floor=
     local ip_ceil=
     _has_envar "BOOTSTRAP_METALLB_LB_RANGE"
+    _has_envar "BOOTSTRAP_METALLB_NGINX_ADDR"
     _has_envar "BOOTSTRAP_METALLB_TRAEFIK_ADDR"
 
     ip_floor=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f1)
@@ -177,6 +178,7 @@ verify_metallb() {
 
     _has_valid_ip "${ip_floor}" "BOOTSTRAP_METALLB_LB_RANGE"
     _has_valid_ip "${ip_ceil}" "BOOTSTRAP_METALLB_LB_RANGE"
+    _has_valid_ip "${BOOTSTRAP_METALLB_NGINX_ADDR}" "BOOTSTRAP_METALLB_NGINX_ADDR"
     _has_valid_ip "${BOOTSTRAP_METALLB_TRAEFIK_ADDR}" "BOOTSTRAP_METALLB_TRAEFIK_ADDR"
 }
 

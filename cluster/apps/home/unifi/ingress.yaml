@@ -32,15 +32,19 @@ metadata:
   name: unifi
   namespace: home
   annotations:
-    kubernetes.io/ingress.class: traefik
+    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+       proxy_ssl_server_name on;
+       proxy_ssl_name unifi.${SECRET_DOMAIN};
 spec:
   tls:
   - secretName: unifi-tls
     hosts:
-    - unifi.lethek.net
+    - unifi.${SECRET_DOMAIN}
   rules:
-  - host: unifi.lethek.net
+  - host: unifi.${SECRET_DOMAIN}
     http:
       paths:
       - pathType: ImplementationSpecific

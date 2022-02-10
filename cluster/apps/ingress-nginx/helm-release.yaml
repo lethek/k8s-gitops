@@ -23,7 +23,7 @@ spec:
       service:
         enabled: true
         externalTrafficPolicy: Local
-        loadBalancerIP: 10.0.3.2
+        loadBalancerIP: "${METALLB_NGINX_ADDR}"
       daemonset:
         hostPorts:
           http: 80

@@ -32,7 +32,7 @@ This repository is forked from the excellent [Kubernetes @Home template cluster]
 
 ## :wave:&nbsp; Introduction
 
-The following components will be installed in your [k3s](https://k3s.io/) cluster by default. They are only included to get a minimum viable cluster up and running. You are free to add / remove components to your liking but anything outside the scope of the below components are not supported by this template.
+The following components will be installed in the [k3s](https://k3s.io/) cluster by default.
 
 Feel free to read up on any of these technologies before you get started to be more familiar with them.
 
@@ -45,7 +45,8 @@ Feel free to read up on any of these technologies before you get started to be m
 - [metallb](https://metallb.universe.tf/) - bare metal load balancer
 - [reloader](https://github.com/stakater/Reloader) - restart pods when Kubernetes `configmap` or `secret` changes
 - [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller) - upgrade k3s
-- [traefik](https://traefik.io) - ingress controller
+- [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) - ingress controller
+- [traefik](https://traefik.io) - another ingress controller (installed but not currently being used)
 
 For provisioning the following tools will be used:
 
@@ -319,7 +320,7 @@ kubectl --kubeconfig=./provision/kubeconfig get pods -n flux-system
 
 3. Finally have Terraform execute the task by running `task terraform:apply:cloudflare`
 
-If Terraform was ran successfully and you have port forwarded `80` and `443` in your router to the `${BOOTSTRAP_METALLB_TRAEFIK_ADDR}` IP, head over to your browser and you _should_ be able to access `https://hajimari.${BOOTSTRAP_CLOUDFLARE_DOMAIN}`!
+If Terraform was ran successfully and you have port forwarded `80` and `443` in your router to the `${BOOTSTRAP_METALLB_NGINX_ADDR}` IP, head over to your browser and you _should_ be able to access `https://hajimari.${BOOTSTRAP_CLOUDFLARE_DOMAIN}`!
 
 ## :mega:&nbsp; Post installation
 
