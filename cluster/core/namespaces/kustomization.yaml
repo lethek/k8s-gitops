@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - cert-manager.yaml
   - home.yaml
+  - ingress-nginx.yaml
   - longhorn-system.yaml
   - media.yaml
   - metallb-system.yaml
