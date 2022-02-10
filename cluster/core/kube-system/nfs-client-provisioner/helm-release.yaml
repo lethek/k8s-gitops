@@ -20,12 +20,12 @@ spec:
       server: ${SVC_NAS_ADDR}
       path: "/volume1/hyde"
       mountOptions:
-      - nfsvers=4.1
-      - tcp
-      - intr
-      - hard
-      - noatime
-      - nodiratime
+        - nfsvers=4.1
+        - tcp
+        - intr
+        - hard
+        - noatime
+        - nodiratime
     storageClass:
       defaultClass: false
       archiveOnDelete: true
