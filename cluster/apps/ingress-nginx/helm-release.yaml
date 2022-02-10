@@ -39,7 +39,7 @@ spec:
           enabled: true
           namespace: kube-system
           namespaceSelector:
-            any: true      
+            any: true
     defaultBackend:
       replicaCount: 3
     podSecurityPolicy:
