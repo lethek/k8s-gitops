@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - default
   - home
+  - ingress-nginx
   - kube-system
   - media
   - networking

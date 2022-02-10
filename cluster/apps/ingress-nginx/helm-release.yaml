@@ -1,0 +1,46 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://kubernetes.github.io/ingress-nginx
+      chart: ingress-nginx
+      version: v4.0.15
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx-charts
+        namespace: flux-system
+  values:
+    controller:
+      kind: "DaemonSet"
+      publishService:
+        enabled: true
+      service:
+        enabled: true
+        externalTrafficPolicy: Local
+        loadBalancerIP: 10.0.3.2
+      daemonset:
+        hostPorts:
+          http: 80
+          https: 443
+      config:
+        use-forwarded-headers: "true"
+        proxy-buffers-number: "8"
+        proxy-buffer-size: "16k"
+        use-http2: "true"
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: kube-system
+          namespaceSelector:
+            any: true      
+    defaultBackend:
+      replicaCount: 3
+    podSecurityPolicy:
+      enabled: true
