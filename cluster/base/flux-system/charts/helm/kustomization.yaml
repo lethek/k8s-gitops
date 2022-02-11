@@ -3,12 +3,14 @@ kind: Kustomization
 resources:
   - authentik-charts.yaml
   - bitnami-charts.yaml
+  - datalist-charts.yaml
   - deliveryhero-charts.yaml
   - descheduler-charts.yaml
   - emberstack-charts.yaml
   - external-dns-charts.yaml
   - grafana-charts.yaml
   - hajimari-charts.yaml
+  - harbor-charts.yaml
   - infracloudio-charts.yaml
   - ingress-nginx-charts.yaml
   - jetstack-charts.yaml

@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: datalust-charts
+  namespace: flux-system
+spec:
+  interval: 15m
+  url: https://helm.datalust.co/
+  timeout: 3m
