@@ -21,7 +21,8 @@ spec:
       pullPolicy: IfNotPresent
     service:
       type: LoadBalancer
-      loadBalancerIP: ${LB_LDAP_ADDR}
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: "${LB_LDAP_ADDR}"
     persistence:
       enabled: false
       size: 512Mi

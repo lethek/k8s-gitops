@@ -23,7 +23,8 @@ spec:
       service:
         enabled: true
         externalTrafficPolicy: Local
-        loadBalancerIP: "${METALLB_NGINX_ADDR}"
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${METALLB_NGINX_ADDR}"
       daemonset:
         hostPorts:
           http: 80
