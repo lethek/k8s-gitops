@@ -9,9 +9,4 @@ k3s_control_node: false
 k3s_agent:
   node-ip: "{{ ansible_host }}"
   kubelet-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=ReadWriteOncePod=true"
-    # Enables the kubelet to gracefully evict pods during a node shutdown
-    - "feature-gates=GracefulNodeShutdown=true"
-    # Allow k8s services to contain TCP and UDP on the same port
-    - "feature-gates=MixedProtocolLBService=true"
+    - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"

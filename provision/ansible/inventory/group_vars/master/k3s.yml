@@ -33,37 +33,20 @@ k3s_server:
   # Required to monitor etcd with kube-prometheus-stack
   etcd-expose-metrics: true
   kubelet-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=ReadWriteOncePod=true"
-    # Allow k8s services to contain TCP and UDP on the same port
-    - "feature-gates=MixedProtocolLBService=true"
-    # Enables the kubelet to gracefully evict pods during a node shutdown
-    - "feature-gates=GracefulNodeShutdown=true"
+    - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"
   kube-controller-manager-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=ReadWriteOncePod=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=GracefulNodeShutdown=true"
+    - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"
     # Required to monitor kube-controller-manager with kube-prometheus-stack
     - "bind-address=0.0.0.0"
   kube-proxy-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=ReadWriteOncePod=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=GracefulNodeShutdown=true"
+    - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"
     # Required to monitor kube-proxy with kube-prometheus-stack
     - "metrics-bind-address=0.0.0.0"
   kube-scheduler-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=ReadWriteOncePod=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=GracefulNodeShutdown=true"
+    - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"
     # Required to monitor kube-scheduler with kube-prometheus-stack
     - "bind-address=0.0.0.0"
   kube-apiserver-arg:
-    - "feature-gates=EphemeralContainers=true"
-    - "feature-gates=ReadWriteOncePod=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=GracefulNodeShutdown=true"
+    - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"
     # Required for HAProxy health-checks
     - "anonymous-auth=true"
