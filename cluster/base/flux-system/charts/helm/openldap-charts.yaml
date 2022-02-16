@@ -2,9 +2,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: bitnami-charts
+  name: openldap-charts
   namespace: flux-system
 spec:
   interval: 15m
-  url: https://charts.bitnami.com/bitnami
+  url: https://jp-gouin.github.io/helm-openldap/
   timeout: 3m

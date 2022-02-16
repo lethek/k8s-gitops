@@ -1,0 +1,74 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: openldap
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: openldap
+      version: 2.1.6
+      sourceRef:
+        kind: HelmRepository
+        name: openldap-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    replicaCount: 3
+    image:
+      pullPolicy: IfNotPresent
+    service:
+      type: LoadBalancer
+      loadBalancerIP: ${LB_LDAP_ADDR}
+    persistence:
+      enabled: false
+      size: 512Mi
+    adminPassword: "${SECRET_DEFAULT_PASSWORD}"
+    configPassword: "${SECRET_DEFAULT_PASSWORD}"
+    env:
+      LDAP_ORGANISATION: "${SECRET_DOMAIN}"
+      LDAP_DOMAIN: "${SECRET_DOMAIN}"
+    ltb-passwd:
+      enabled: false
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    customLdifFiles:
+      00-organizational-units.ldif: |-
+        dn: ou=Groups,{{ LDAP_BASE_DN }}
+        objectClass: organizationalUnit
+        ou: Groups
+
+        dn: ou=People,{{ LDAP_BASE_DN }}
+        objectClass: organizationalUnit
+        ou: People
+
+      01-default-users.ldif: |-
+        dn: cn=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
+        objectClass: inetOrgPerson
+        objectClass: organizationalPerson
+        objectClass: person
+        objectClass: top
+        cn: ${SECRET_DEFAULT_USERNAME}
+        sn: M
+        mail: ${SECRET_DEFAULT_EMAIL}
+        userPassword: ${SECRET_DEFAULT_PASSWORD}
+
+      01-default-groups.ldif: |-
+        dn: cn=Admins,ou=Groups,{{ LDAP_BASE_DN }}
+        objectClass: groupOfUniqueNames
+        objectClass: top
+        cn: Admins
+        uniqueMember: cn=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
+
+        dn: cn=Users,ou=Groups,{{ LDAP_BASE_DN }}
+        objectClass: groupOfUniqueNames
+        objectClass: top
+        cn: Users
+        uniqueMember:
