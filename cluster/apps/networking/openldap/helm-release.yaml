@@ -24,7 +24,8 @@ spec:
       annotations:
         metallb.universe.tf/loadBalancerIPs: "${LB_LDAP_ADDR}"
     persistence:
-      enabled: false
+      enabled: true
+      storageClass: longhorn
       size: 512Mi
     adminPassword: "${SECRET_DEFAULT_PASSWORD}"
     configPassword: "${SECRET_DEFAULT_PASSWORD}"
