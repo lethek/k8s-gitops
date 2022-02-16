@@ -32,6 +32,7 @@ spec:
     env:
       LDAP_ORGANISATION: "${SECRET_DOMAIN}"
       LDAP_DOMAIN: "${SECRET_DOMAIN}"
+      LDAP_BASE_DN: "${LDAP_BASE_DN}"
     ltb-passwd:
       enabled: false
     resources:

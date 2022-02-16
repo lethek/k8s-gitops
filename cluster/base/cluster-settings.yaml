@@ -5,6 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  LDAP_BASE_DN: dc=lethek,dc=net
   METALLB_LB_RANGE: 10.0.3.1-10.0.3.254
   LB_NGINX_ADDR: 10.0.3.1
   LB_TRAEFIK_ADDR: 10.0.3.2
