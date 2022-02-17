@@ -9,3 +9,4 @@ resources:
   - media.yaml
   - metallb-system.yaml
   - networking.yaml
+  - test.yaml
