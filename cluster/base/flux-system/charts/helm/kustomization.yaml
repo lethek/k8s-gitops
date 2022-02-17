@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - bitnami-charts.yaml
   - datalust-charts.yaml
   - deliveryhero-charts.yaml
   - descheduler-charts.yaml

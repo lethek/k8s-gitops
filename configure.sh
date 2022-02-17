@@ -173,6 +173,7 @@ verify_metallb() {
     _has_envar "BOOTSTRAP_LB_NGINX_ADDR"
     _has_envar "BOOTSTRAP_LB_TRAEFIK_ADDR"
     _has_envar "BOOTSTRAP_LB_LDAP_ADDR"
+    _has_envar "BOOTSTRAP_LB_REDIS_ADDR"
 
     ip_floor=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f1)
     ip_ceil=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f2)
@@ -182,6 +183,7 @@ verify_metallb() {
     _has_valid_ip "${BOOTSTRAP_LB_NGINX_ADDR}" "BOOTSTRAP_LB_NGINX_ADDR"
     _has_valid_ip "${BOOTSTRAP_LB_TRAEFIK_ADDR}" "BOOTSTRAP_LB_TRAEFIK_ADDR"
     _has_valid_ip "${BOOTSTRAP_LB_LDAP_ADDR}" "BOOTSTRAP_LB_LDAP_ADDR"
+    _has_valid_ip "${BOOTSTRAP_LB_REDIS_ADDR}" "BOOTSTRAP_LB_REDIS_ADDR"
 }
 
 verify_git_repository() {
