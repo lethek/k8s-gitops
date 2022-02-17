@@ -35,9 +35,9 @@ spec:
         proxy-buffer-size: "16k"
         use-http2: "true"
       metrics:
-        enabled: true
+        enabled: false
         serviceMonitor:
-          enabled: true
+          enabled: false
           namespace: kube-system
           namespaceSelector:
             any: true
