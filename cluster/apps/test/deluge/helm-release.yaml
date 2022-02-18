@@ -18,6 +18,7 @@ spec:
   values:
     env:
       TZ: "Australia/Brisbane"
+      PASSWORD: "${SECRET_DEFAULT_PASSWORD}"
     service:
       main:
         type: LoadBalancer
