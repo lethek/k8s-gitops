@@ -26,9 +26,9 @@ spec:
       requests:
         memory: 256Mi
     ingress:
+      ingressClassName: nginx
       annotations:
-        kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: letsencrypt-production
+        kubernetes.io/tls-acme: "true"
       tls:
         - secretName: seq-tls
           hosts:

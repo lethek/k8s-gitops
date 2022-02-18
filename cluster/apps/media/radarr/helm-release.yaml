@@ -24,9 +24,9 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: nginx
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          kubernetes.io/tls-acme: "true"
           # traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           # hajimari.io/enable: "true"
           # hajimari.io/icon: "filmstrip"

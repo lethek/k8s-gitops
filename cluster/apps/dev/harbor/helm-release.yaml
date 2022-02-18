@@ -22,11 +22,11 @@ spec:
     expose:
       type: ingress
       ingress:
+        ingressClassName: nginx
+        annotations:
+          kubernetes.io/tls-acme: "true"
         hosts:
           core: harbor.${SECRET_DOMAIN}
-        annotations:
-          kubernetes.io/ingress.class: nginx
-          cert-manager.io/cluster-issuer: letsencrypt-production
       tls:
         enabled: true
         certSource: secret

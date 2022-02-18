@@ -100,7 +100,7 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          kubernetes.io/tls-acme: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "weather-sunset"
           #traefik.ingress.kubernetes.io/router.entrypoints: "websecure"

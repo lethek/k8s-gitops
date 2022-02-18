@@ -8,18 +8,18 @@ spec:
   capacity:
     storage: 1Mi
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${SVC_NAS_ADDR}
     path: /volume1/share/videos
   mountOptions:
-  - nfsvers=4.1
-  - tcp
-  - intr
-  - hard
-  - noatime
-  - nodiratime
+    - nfsvers=4.1
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -28,7 +28,7 @@ metadata:
   namespace: media
 spec:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   storageClassName: nfs-media-shared-videos
   resources:
     requests:
