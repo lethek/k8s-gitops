@@ -25,13 +25,14 @@ spec:
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_DELUGE_ADDR}"
         ports:
-          bt:
+          bt-tcp:
             protocol: TCP
             port: 6881
+            targetPort: 6881
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: nginx
         annotations:
           kubernetes.io/tls-acme: "true"
         hosts:
