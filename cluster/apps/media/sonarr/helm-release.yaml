@@ -24,7 +24,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: nginx
         annotations:
           kubernetes.io/tls-acme: "true"
           # traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
