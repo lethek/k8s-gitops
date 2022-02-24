@@ -18,9 +18,15 @@ spec:
     installCRDs: false
     webhook:
       enabled: true
+      tolerations:
+        - key: "arm"
+          operator: "Exists"
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53
       - --dns01-recursive-nameservers-only
+    tolerations:
+      - key: "arm"
+        operator: "Exists"
     replicaCount: 1
     podDnsPolicy: "None"
     podDnsConfig:

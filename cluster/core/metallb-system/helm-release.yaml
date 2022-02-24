@@ -21,3 +21,11 @@ spec:
           protocol: layer2
           addresses:
             - "${METALLB_LB_RANGE}"
+    controller:
+      tolerations:
+        - key: "arm"
+          operator: "Exists"
+    speaker:
+      tolerations:
+        - key: "arm"
+          operator: "Exists"
