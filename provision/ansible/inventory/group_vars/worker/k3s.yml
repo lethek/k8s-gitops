@@ -10,3 +10,4 @@ k3s_agent:
   node-ip: "{{ ansible_host }}"
   kubelet-arg:
     - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"
+  node-taint: "{{ taints | default('[]') }}"

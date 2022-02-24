@@ -317,15 +317,19 @@ generate_ansible_hosts() {
             node_id=$(echo "${var}" | awk -F"_" '{print $5}')
             node_control="BOOTSTRAP_ANSIBLE_CONTROL_NODE_${node_id}"
             if [[ "${!node_control}" == "true" ]]; then
+                node_taints="BOOTSTRAP_ANSIBLE_TAINTS_${node_id}"
                 node_hostname="BOOTSTRAP_ANSIBLE_HOSTNAME_${node_id}"
                 host_key="${!node_hostname:-${default_control_node_prefix}}"
                 if [ "${host_key}" == "${default_control_node_prefix}" ]; then
                     node_hostname=${default_control_node_prefix}${node_id}
                 else
                     node_hostname=${!node_hostname}
-            fi
+                fi
                 printf "        %s:\n" "${node_hostname}"
                 printf "          ansible_host: %s\n" "${!var}"
+                if [[ -n "${!node_taints}" ]]; then
+                    printf "          taints: %s\n" "${!node_taints}"
+                fi
             else
                 worker_node_count=$((worker_node_count+1))
             fi
@@ -337,6 +341,7 @@ generate_ansible_hosts() {
                 node_id=$(echo "${var}" | awk -F"_" '{print $5}')
                 node_control="BOOTSTRAP_ANSIBLE_CONTROL_NODE_${node_id}"
                 if [[ "${!node_control}" == "false" ]]; then
+                    node_taints="BOOTSTRAP_ANSIBLE_TAINTS_${node_id}"
                     node_hostname="BOOTSTRAP_ANSIBLE_HOSTNAME_${node_id}"
                     host_key="${!node_hostname:-${default_worker_node_prefix}}"
                     if [ "${host_key}" == "${default_worker_node_prefix}" ]; then
@@ -346,6 +351,9 @@ generate_ansible_hosts() {
                     fi
                     printf "        %s:\n" "${node_hostname}"
                     printf "          ansible_host: %s\n" "${!var}"
+                    if [[ -n "${!node_taints}" ]]; then
+                        printf "          taints: %s\n" "${!node_taints}"
+                    fi
                 fi
             done
         fi

@@ -52,3 +52,4 @@ k3s_server:
     - "feature-gates=EphemeralContainers=true,ReadWriteOncePod=true,GracefulNodeShutdown=true,MixedProtocolLBService=true"
     # Required for HAProxy health-checks
     - "anonymous-auth=true"
+  node-taint: "{{ taints | default('[]') }}"
