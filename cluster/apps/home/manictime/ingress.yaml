@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: manictime
+  namespace: home
+  annotations:
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: manictime-tls
+      hosts:
+        - manictime.${SECRET_DOMAIN}
+  rules:
+    - host: manictime.${SECRET_DOMAIN}
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: manictime
+                port:
+                  number: 8080

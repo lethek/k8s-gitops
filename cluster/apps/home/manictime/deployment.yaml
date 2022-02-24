@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manictime
+  namespace: home
+  labels:
+    app.kubernetes.io/name: manictime
+spec:
+  serviceName: manictime
+  selector:
+    matchLabels:
+      app: manictime
+  template:
+    metadata:
+      labels:
+        app: manictime
+    spec:
+      initContainers:
+        - name: manictime-init
+          image: manictime/manictimeserver
+          command: [ "/bin/sh" ]
+          args:
+            - -c
+            - dotnet ManicTimeServer.dll addadmin -u "$(ADMIN_EMAIL)" -p "$(ADMIN_PASSWORD)"
+          env:
+            - name: ADMIN_EMAIL
+              value: "${SECRET_DEFAULT_EMAIL}"
+            - name: ADMIN_PASSWORD
+              value: "${SECRET_DEFAULT_PASSWORD}"
+          volumeMounts:
+            - name: manictime-data
+              mountPath: /app/Data
+            - name: manictime-config
+              mountPath: /app/Data/ManicTimeServerSettings.json
+              subPath: ManicTimeServerSettings.json
+      containers:
+        - name: manictime
+          image: manictime/manictimeserver
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          ports:
+            - containerPort: 8080
+              name: manictime
+          volumeMounts:
+            - name: manictime-data
+              mountPath: /app/Data
+            - name: manictime-config
+              mountPath: /app/Data/ManicTimeServerSettings.json
+              subPath: ManicTimeServerSettings.json
+      volumes:
+        - name: manictime-data
+          persistentVolumeClaim:
+            claimName: manictime-data
+        - name: manictime-config
+          configMap:
+            name: manictime-config
+            items:
+            - key: ManicTimeServerSettings.json
+              path: ManicTimeServerSettings.json

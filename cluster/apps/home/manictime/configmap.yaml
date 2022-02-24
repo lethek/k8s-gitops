@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: manictime-config
+  namespace: home
+data:
+  ManicTimeServerSettings.json: |
+    {
+      "web": {
+        "reverseProxy": {
+          "addresses": [ "*" ],
+          "networks": [ "*" ]
+        }
+      }
+    }
