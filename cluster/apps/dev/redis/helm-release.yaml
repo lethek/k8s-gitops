@@ -21,6 +21,8 @@ spec:
       redis:
         password: "${SECRET_DEFAULT_PASSWORD}"
         storageClassName: longhorn
+    replica:
+      replicaCount: 1
     master:
       kind: Deployment
       service:
