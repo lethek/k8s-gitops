@@ -24,7 +24,6 @@ spec:
     replica:
       replicaCount: 1
     master:
-      # kind: Deployment
       service:
         type: LoadBalancer
         annotations:
