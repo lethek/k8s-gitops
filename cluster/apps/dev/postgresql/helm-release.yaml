@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgresql
+  namespace: dev
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: postgresql
+      version: 11.0.4
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    primary:
+      persistence:
+        enabled: true
+        storageClass: longhorn
+    auth:
+      postgresPassword: "${SECRET_DEFAULT_PASSWORD}"
+    ldap:
+      enabled: true
+      server: openldap-openldap-stack-ha.networking.svc.cluster.local
+      port: 389
+      baseDN: "${LDAP_BASE_DN}"
+      bindDN: "cn=admin,${LDAP_BASE_DN}"
+      bind_password: "${SECRET_DEFAULT_PASSWORD}"
+      search_attr: cn
