@@ -15,8 +15,8 @@ spec:
         name: authelia-charts
         namespace: flux-system
   dependsOn:
-    - name: postgresql
-      namespace: dev
+    # - name: postgresql
+    #   namespace: dev
     - name: redis
       namespace: dev
     - name: openldap
