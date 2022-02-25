@@ -21,6 +21,10 @@ spec:
       persistence:
         enabled: true
         storageClass: longhorn
+      service:
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_POSTGRES_ADDR}"
     auth:
       postgresPassword: "${SECRET_DEFAULT_PASSWORD}"
     ldap:
