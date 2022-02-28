@@ -48,6 +48,13 @@ spec:
       env:
         - name: TZ
           value: Australia/Brisbane
+    resources:
+      limits:
+        cpu: "4.00"
+        memory: 128Mi
+      requests:
+        cpu: "0.25"
+        memory: 50Mi
     configMap:
       enabled: true
       theme: light
@@ -85,7 +92,7 @@ spec:
           #     - 10.10.0.0/16
 
         rules:
-          # bypass Authelia WAN + LAN
+          # Bypass Authelia WAN + LAN
           - domain:
               - auth.${SECRET_DOMAIN}
             policy: bypass
@@ -94,6 +101,7 @@ spec:
           - domain:
               - alert-manager.${SECRET_DOMAIN}
               - prometheus.${SECRET_DOMAIN}
+              - longhorn.${SECRET_DOMAIN}
             subject: ["group:Users"]
             policy: deny
 

@@ -27,3 +27,14 @@ spec:
       backupstorePollInterval: 1800
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       defaultDataLocality: best-effort
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      host: "longhorn.${SECRET_DOMAIN}"
+      tls: true
+      tlsSecret: longhorn-tls
+      annotations:
+        kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
+        nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
