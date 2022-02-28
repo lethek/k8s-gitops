@@ -57,7 +57,7 @@ spec:
         memory: 50Mi
     configMap:
       enabled: true
-      theme: light
+      theme: auto
       default_redirection_url: "https://hajimari.${SECRET_DOMAIN}"
       server:
         read_buffer_size: 8192
