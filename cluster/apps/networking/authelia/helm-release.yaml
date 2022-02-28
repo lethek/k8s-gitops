@@ -166,3 +166,11 @@ spec:
         key: REDIS_PASSWORD
         value: "${SECRET_DEFAULT_PASSWORD}"
         filename: REDIS_PASSWORD
+      # jwt:
+      #   key: JWT_TOKEN
+      #   value: ""
+      #   filename: JWT_TOKEN
+      # storageEncryptionKey:
+      #   key: STORAGE_ENCRYPTION_KEY
+      #   value: ""
+      #   filename: STORAGE_ENCRYPTION_KEY
