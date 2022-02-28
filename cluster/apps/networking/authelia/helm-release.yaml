@@ -130,14 +130,24 @@ spec:
           port: 6379
           database_index: 0
       notifier:
-        disable_startup_check: true
+        disable_startup_check: false
+        smtp:
+          enabled: true
+          enabledSecret: true
+          host: "${SECRET_SMTP_SERVER}"
+          port: ${SECRET_SMTP_PORT}
+          username: "${SECRET_SMTP_USERNAME}"
+          sender: "${SECRET_AUTH_SMTP_SENDER}"
+          identifier: "${SECRET_DOMAIN}"
+          subject: "[Authelia] {title}"
+          startup_check_address: "${SECRET_DEFAULT_EMAIL}"
     secret:
       ldap:
         key: LDAP_PASSWORD
         value: "${SECRET_DEFAULT_PASSWORD}"
       smtp:
         key: SMTP_PASSWORD
-        value: "${SECRET_DEFAULT_PASSWORD}"
+        value: "${SECRET_SMTP_PASSWORD}"
         filename: SMTP_PASSWORD
       storage:
         key: STORAGE_PASSWORD
