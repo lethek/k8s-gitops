@@ -58,11 +58,12 @@ spec:
     configMap:
       enabled: true
       theme: light
+      default_redirection_url: "https://hajimari.${SECRET_DOMAIN}"
       server:
         read_buffer_size: 8192
         write_buffer_size: 8192
       authentication_backend:
-        disable_reset_password: true
+        disable_reset_password: false
         ldap:
           enabled: true
           implementation: custom
