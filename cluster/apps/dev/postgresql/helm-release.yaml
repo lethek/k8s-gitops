@@ -25,13 +25,11 @@ spec:
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${LB_POSTGRES_ADDR}"
-      # initdb:
-      #   scripts:
-      #     01_init_authelia\.sql: |
-      #       CREATE DATABASE authelia
-      #         OWNER = postgres
-      #         ENCODING = 'UTF8'
-      #         TABLESPACE = pg_default;
+      initdb:
+        scripts:
+          01-init-authelia.sql: |
+            CREATE USER authelia;
+            CREATE DATABASE authelia WITH OWNER = authelia;
     auth:
       postgresPassword: "${SECRET_DEFAULT_PASSWORD}"
     ldap:
@@ -41,4 +39,4 @@ spec:
       baseDN: "${LDAP_BASE_DN}"
       bindDN: "cn=admin,${LDAP_BASE_DN}"
       bind_password: "${SECRET_DEFAULT_PASSWORD}"
-      search_attr: cn
+      search_attr: uid

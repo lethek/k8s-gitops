@@ -55,7 +55,7 @@ spec:
           url: "ldap://openldap-openldap-stack-ha.networking.svc.cluster.local:389"
           base_dn: "${LDAP_BASE_DN}"
           user: "cn=admin,${LDAP_BASE_DN}"
-          username_attribute: cn
+          username_attribute: uid
           group_name_attribute: cn
           additional_users_dn: "ou=People"
           additional_groups_dn: "ou=Groups"

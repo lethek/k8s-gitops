@@ -52,26 +52,39 @@ spec:
         objectClass: organizationalUnit
         ou: People
 
+        dn: ou=Services,{{ LDAP_BASE_DN }}
+        objectClass: organizationalUnit
+        ou: Services
+
       01-default-users.ldif: |-
-        dn: cn=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
+        dn: uid=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
         objectClass: inetOrgPerson
         objectClass: organizationalPerson
         objectClass: person
         objectClass: top
+        uid: ${SECRET_DEFAULT_USERNAME}
         cn: ${SECRET_DEFAULT_USERNAME}
-        sn: M
+        sn: ${SECRET_DEFAULT_USERNAME}
         mail: ${SECRET_DEFAULT_EMAIL}
         userPassword: ${SECRET_DEFAULT_PASSWORD}
 
-      01-default-groups.ldif: |-
+      02-default-service-accounts.ldif: |-
+        dn: uid=authelia,ou=Services,{{ LDAP_BASE_DN }}
+        objectClass: account
+        objectClass: simpleSecurityObject
+        objectClass: top
+        uid: authelia
+        userPassword: ${SECRET_DEFAULT_PASSWORD}
+
+      03-default-groups.ldif: |-
         dn: cn=Admins,ou=Groups,{{ LDAP_BASE_DN }}
-        objectClass: groupOfUniqueNames
+        objectClass: groupOfNames
         objectClass: top
         cn: Admins
-        uniqueMember: cn=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
+        member: uid=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
 
         dn: cn=Users,ou=Groups,{{ LDAP_BASE_DN }}
-        objectClass: groupOfUniqueNames
+        objectClass: groupOfNames
         objectClass: top
         cn: Users
-        uniqueMember:
+        member:
