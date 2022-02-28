@@ -27,9 +27,8 @@ spec:
         ingressClassName: nginx
         annotations:
           kubernetes.io/tls-acme: "true"
-          # traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          # hajimari.io/enable: "true"
-          # hajimari.io/icon: "filmstrip"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "filmstrip"
         hosts:
           - host: radarr.${SECRET_DOMAIN}
             paths:
@@ -53,6 +52,6 @@ spec:
     resources:
       requests:
         memory: 250Mi
-        cpu: 500m
+        cpu: 25m
       limits:
         memory: 500Mi
