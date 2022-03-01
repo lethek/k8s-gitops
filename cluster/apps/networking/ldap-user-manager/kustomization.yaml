@@ -1,8 +1,6 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - authelia
-  - ldap-user-manager
-  - openldap
-  - portainer
-  - traefik
+  - secret.yaml
+  #- deployment.yaml

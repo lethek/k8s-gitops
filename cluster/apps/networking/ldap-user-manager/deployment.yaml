@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap-user-manager
+  namespace: networking
+  labels:
+    app.kubernetes.io/name: ldap-user-manager
+spec:
+  serviceName: ldap-user-manager
+  selector:
+    matchLabels:
+      app: ldap-user-manager
+  template:
+    metadata:
+      labels:
+        app: ldap-user-manager
+      annotations:
+        configmap.reloader.stakater.com/reload: "ldap-user-manager"
+    spec:
+      containers:
+        - name: ldap-user-manager
+          image: wheelybird/ldap-user-manager:v1.7
+          envFrom:
+            - secretRef:
+                name: ldap-user-manager
+          ports:
+            - name: https
+              containerPort: 443
+              protocol: TCP
+            - name: http
+              containerPort: 80
+              protocol: TCP
