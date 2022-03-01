@@ -77,11 +77,11 @@ spec:
                     class: ["03"]
                     vendor: ["051d"]
                     device: ["0002"]
-      tolerations:
-        - effect: "NoExecute"
-          operator: "Exists"
-        - effect: "NoSchedule"
-          operator: "Exists"    
+      # tolerations:
+      #   - effect: "NoExecute"
+      #     operator: "Exists"
+      #   - effect: "NoSchedule"
+      #     operator: "Exists"    
     master:
       tolerations:
         - key: "node-role.kubernetes.io/master"

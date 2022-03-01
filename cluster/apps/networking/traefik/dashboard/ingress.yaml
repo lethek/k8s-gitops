@@ -7,7 +7,7 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     hajimari.io/appName: "traefik"
-    hajimari.io/enable: "true"
+    hajimari.io/enable: "false"
     hajimari.io/icon: "web"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
