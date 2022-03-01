@@ -24,12 +24,17 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - dev
+          - home
+          - longhorn-system
+          - media
           - networking
-      name: "you"
+          - test
+      name: "${SECRET_DEFAULT_USERNAME}"
       customApps:
-        - name: Some External Cluster Service
-          url: http://192.168.1.100:5000
-          icon: test-tube
+        - name: Plex
+          url: https://10.0.0.1:32400
+          icon: plex
       groups:
         - name: Communicate
           links:
@@ -47,14 +52,6 @@ spec:
               url: "https://dropbox.com"
             - name: Drive
               url: "https://drive.google.com"
-        - name: Design
-          links:
-            - name: Awwwards
-              url: "https://awwwards.com"
-            - name: Dribbble
-              url: "https://dribbble.com"
-            - name: Muz.li
-              url: "https://medium.muz.li/"
         - name: Dev
           links:
             - name: Codepen
@@ -63,14 +60,6 @@ spec:
               url: "https://devdocs.io"
             - name: Devhints
               url: "https://devhints.io"
-        - name: Lifestyle
-          links:
-            - name: Design Milk
-              url: "https://design-milk.com/category/interior-design/"
-            - name: Dwell
-              url: "https://www.dwell.com/"
-            - name: Freshome
-              url: "https://www.mymove.com/freshome/"
         - name: Media
           links:
             - name: Spotify
@@ -81,8 +70,8 @@ spec:
               url: "https://youtube.com/feed/subscriptions"
         - name: Reading
           links:
-            - name: Instapaper
-              url: "https://www.instapaper.com/u"
+            - name: Pocket
+              url: "https://getpocket.com/my-list"
             - name: Medium
               url: "http://medium.com"
             - name: Reddit
@@ -113,9 +102,9 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-          - hosts:
+          - secretName: "hajimari-tls"
+            hosts:
               - "hajimari.${SECRET_DOMAIN}"
-            secretName: "hajimari-tls"
     persistence:
       data:
         enabled: true
@@ -124,7 +113,7 @@ spec:
       configmap.reloader.stakater.com/reload: "hajimari-settings"
     resources:
       requests:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 10m
+        memory: 64Mi
       limits:
-        memory: 256Mi
+        memory: 128Mi
