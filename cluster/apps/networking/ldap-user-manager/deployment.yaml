@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap-user-manager
+  namespace: networking
+  labels:
+    app.kubernetes.io/name: ldap-user-manager
+spec:
+  serviceName: ldap-user-manager
+  selector:
+    matchLabels:
+      app: ldap-user-manager
+  template:
+    metadata:
+      labels:
+        app: ldap-user-manager
+    spec:
+      containers:
+        - name: ldap-user-manager
+          image: wheelybird/ldap-user-manager:v1.7
+          envFrom:
+            - secretRef:
+                name: ldap-user-manager
+          ports:
+            - name: https
+              containerPort: 443
+              protocol: TCP
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /lam
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /lam
+          #     port: http
+          # securityContext:
+          #   {{- toYaml .Values.securityContext | nindent 12 }}
+      # serviceAccountName: {{ include "ldap-user-manager.serviceAccountName" . }}
+      # securityContext:
+      #   {{- toYaml .Values.podSecurityContext | nindent 8 }}
