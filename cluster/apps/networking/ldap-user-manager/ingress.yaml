@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ldap-user-manager
+  namespace: networking
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "account-group"
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: ldap-user-manager-tls
+      hosts:
+        - users.${SECRET_DOMAIN}
+  rules:
+    - host: users.${SECRET_DOMAIN}
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ldap-user-manager
+                port:
+                  number: 443

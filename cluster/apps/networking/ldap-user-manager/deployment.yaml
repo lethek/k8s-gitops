@@ -24,6 +24,9 @@ spec:
           envFrom:
             - secretRef:
                 name: ldap-user-manager-env
+          env:
+            - name: SERVER_HOSTNAME
+              value: "users.${SECRET_DOMAIN}"
           ports:
             - name: https
               containerPort: 443
