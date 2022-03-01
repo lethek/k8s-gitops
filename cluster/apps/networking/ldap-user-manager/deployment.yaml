@@ -16,14 +16,14 @@ spec:
       labels:
         app: ldap-user-manager
       annotations:
-        configmap.reloader.stakater.com/reload: "ldap-user-manager"
+        secret.reloader.stakater.com/reload: "ldap-user-manager-env"
     spec:
       containers:
         - name: ldap-user-manager
           image: wheelybird/ldap-user-manager:v1.7
           envFrom:
             - secretRef:
-                name: ldap-user-manager
+                name: ldap-user-manager-env
           ports:
             - name: https
               containerPort: 443
