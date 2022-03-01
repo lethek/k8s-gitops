@@ -37,11 +37,11 @@ spec:
       enabled: false
     resources:
       requests:
-        cpu: "100m"
-        memory: "256Mi"
+        cpu: "10m"
+        memory: "64Mi"
       limits:
         cpu: "500m"
-        memory: "512Mi"
+        memory: "128Mi"
     customLdifFiles:
       00-organizational-units.ldif: |-
         dn: ou=Groups,{{ LDAP_BASE_DN }}
