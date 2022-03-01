@@ -82,8 +82,6 @@ spec:
           operator: "Exists"
         - effect: "NoSchedule"
           operator: "Exists"    
-        - key: "arm"
-          operator: "Exists"
     master:
       tolerations:
         - key: "node-role.kubernetes.io/master"
