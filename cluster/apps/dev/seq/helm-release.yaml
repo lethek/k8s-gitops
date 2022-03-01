@@ -29,6 +29,8 @@ spec:
       ingressClassName: nginx
       annotations:
         kubernetes.io/tls-acme: "true"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "math-log"
       tls:
         - secretName: seq-tls
           hosts:

@@ -43,6 +43,8 @@ spec:
           add_header Pragma "no-cache";
           add_header X-Frame-Options "SAMEORIGIN";
           add_header X-XSS-Protection "1; mode=block";
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "logout"
     pod:
       kind: DaemonSet
       env:
@@ -50,10 +52,10 @@ spec:
           value: Australia/Brisbane
     resources:
       limits:
-        cpu: "4.00"
+        cpu: "1.00"
         memory: 128Mi
       requests:
-        cpu: "0.25"
+        cpu: 25m
         memory: 50Mi
     configMap:
       enabled: true

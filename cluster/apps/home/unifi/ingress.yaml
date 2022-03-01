@@ -37,6 +37,8 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
        proxy_ssl_server_name on;
        proxy_ssl_name unifi.${SECRET_DOMAIN};
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "lan"
 spec:
   ingressClassName: nginx
   tls:

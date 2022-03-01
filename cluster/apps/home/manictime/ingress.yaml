@@ -6,6 +6,8 @@ metadata:
   namespace: home
   annotations:
     kubernetes.io/tls-acme: "true"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "timer"
 spec:
   ingressClassName: nginx
   tls:

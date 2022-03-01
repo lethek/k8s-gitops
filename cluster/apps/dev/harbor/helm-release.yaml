@@ -25,6 +25,8 @@ spec:
         ingressClassName: nginx
         annotations:
           kubernetes.io/tls-acme: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "docker"
         hosts:
           core: harbor.${SECRET_DOMAIN}
       tls:
