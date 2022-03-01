@@ -50,9 +50,9 @@ spec:
                     vendor: ["8086"]
             - name: "amd-gpu"
               matchOn:
-              - pciId:
-                  class: ["0300"]
-                  vendor: ["1002"]
+                - pciId:
+                    class: ["0300"]
+                    vendor: ["1002"]
             - name: coral-tpu
               matchOn:
                 - pciId:
@@ -67,21 +67,16 @@ spec:
                     device: ["0200"]
             - name: "zigbee"
               matchOn:
-              - usbId:
-                  class: ["ff"]
-                  vendor: ["1a86"]
-                  device: ["7523"]
+                - usbId:
+                    class: ["ff"]
+                    vendor: ["1a86"]
+                    device: ["7523"]
             - name: ups-apc
               matchOn:
                 - usbId:
                     class: ["03"]
                     vendor: ["051d"]
                     device: ["0002"]
-      # tolerations:
-      #   - effect: "NoExecute"
-      #     operator: "Exists"
-      #   - effect: "NoSchedule"
-      #     operator: "Exists"    
     master:
       tolerations:
         - key: "node-role.kubernetes.io/master"
