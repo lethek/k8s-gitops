@@ -55,6 +55,6 @@ spec:
         cpu: 25m
       limits:
         memory: 500Mi
-podSecurityContext:
-  runAsUser: 568
-  fsGroup: 568
+    podSecurityContext:
+      runAsUser: 568
+      fsGroup: 568
