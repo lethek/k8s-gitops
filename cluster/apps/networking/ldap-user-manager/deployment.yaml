@@ -15,15 +15,56 @@ spec:
     metadata:
       labels:
         app: ldap-user-manager
-      annotations:
-        secret.reloader.stakater.com/reload: "ldap-user-manager-env"
+      # annotations:
+      #   secret.reloader.stakater.com/reload: "ldap-user-manager-env"
     spec:
       containers:
         - name: ldap-user-manager
           image: wheelybird/ldap-user-manager:v1.7
-          envFrom:
-            - secretRef:
-                name: ldap-user-manager-env
+          # envFrom:
+          #   - secretRef:
+          #       name: ldap-user-manager-env
+          env:
+            - name: SERVER_HOSTNAME
+              value: "users.${SECRET_DOMAIN}"
+            - name: LDAP_URI
+              value: "ldap://openldap-openldap-stack-ha.networking.svc.cluster.local:389"
+            - name: LDAP_BASE_DN
+              value: "${LDAP_BASE_DN}"
+            - name: LDAP_ADMIN_BIND_DN
+              value: "cn=admin,${LDAP_BASE_DN}"
+            - name: LDAP_ADMIN_BIND_PWD
+              value: "${SECRET_DEFAULT_PASSWORD}"
+            - name: LDAP_ADMINS_GROUP
+              value: "Admins"
+            - name: LDAP_USER_OU
+              value: "People"
+            - name: LDAP_GROUP_OU
+              value: "Groups"
+            - name: LDAP_ACCOUNT_ATTRIBUTE
+              value: "uid"
+            - name: LDAP_GROUP_MEMBERSHIP_ATTRIBUTE
+              value: "member"
+            - name: DEFAULT_USER_GROUP
+              value: "users"
+            - name: EMAIL_DOMAIN
+              value: "${SECRET_DOMAIN}"
+            - name: USERNAME_FORMAT
+              value: "{first_name}"
+            - name: SMTP_HOSTNAME
+              value: "${SECRET_SMTP_SERVER}"
+            - name: SMTP_HOST_PORT
+              value: "${SECRET_SMTP_PORT}"
+            - name: SMTP_USERNAME
+              value: "${SECRET_SMTP_USERNAME}"
+            - name: SMTP_PASSWORD
+              value: "${SECRET_SMTP_PASSWORD}"
+            - name: SMTP_USE_TLS
+              value: "true"
+            - name: ACCOUNT_REQUESTS_EMAIL
+              value: "${SECRET_DEFAULT_EMAIL}"
+            - name: ACCOUNT_REQUESTS_ENABLED
+              value: "false"
           ports:
             - name: https
               containerPort: 443
