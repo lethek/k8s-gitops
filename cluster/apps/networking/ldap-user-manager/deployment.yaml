@@ -15,15 +15,15 @@ spec:
     metadata:
       labels:
         app: ldap-user-manager
-      # annotations:
-      #   secret.reloader.stakater.com/reload: "ldap-user-manager-env"
+      annotations:
+        secret.reloader.stakater.com/reload: "ldap-user-manager-env"
     spec:
       containers:
         - name: ldap-user-manager
           image: wheelybird/ldap-user-manager:latest
-          # envFrom:
-          #   - secretRef:
-          #       name: ldap-user-manager-env
+          envFrom:
+            - secretRef:
+                name: ldap-user-manager-env
           # env:
           #   - name: SERVER_HOSTNAME
           #     value: "users.${SECRET_DOMAIN}"
