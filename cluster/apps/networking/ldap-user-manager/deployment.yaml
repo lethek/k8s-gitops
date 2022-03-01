@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: ldap-user-manager
-          image: wheelybird/ldap-user-manager:latest
+          image: wheelybird/ldap-user-manager:v1.7
           envFrom:
             - secretRef:
                 name: ldap-user-manager-env
