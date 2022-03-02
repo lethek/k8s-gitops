@@ -4,6 +4,7 @@ resources:
   - _pvc/nfs-media-shared-downloads-pvc.yaml
   - _pvc/nfs-media-shared-videos-pvc.yaml
   - overseerr
+  - prowlarr
   - radarr
   - readarr
   - sabnzbd

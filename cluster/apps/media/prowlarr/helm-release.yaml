@@ -1,0 +1,65 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prowlarr
+  namespace: media
+spec:
+  releaseName: prowlarr
+  interval: 10m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: prowlarr
+      version: 4.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/prowlarr-nightly
+      tag: v0.2.0.1552
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/tls-acme: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: cloud-search
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
+        hosts:
+          - host: prowlarr.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: prowlarr-tls
+            hosts:
+              - prowlarr.${SECRET_DOMAIN}
+      api:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: prowlarr.${SECRET_DOMAIN}
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: prowlarr-tls
+            hosts:
+              - prowlarr.${SECRET_DOMAIN}
+    persistence:
+      config:
+        enabled: true
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: "1Gi"
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 25m
+      limits:
+        memory: 500Mi
