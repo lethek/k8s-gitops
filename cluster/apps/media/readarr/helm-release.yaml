@@ -61,9 +61,10 @@ spec:
         size: "1Gi"
       media:
         enabled: true
-        existingClaim: nfs-media-shared-downloads-pvc
+        existingClaim: nfs-shared-media-pvc
         accessMode: ReadWriteMany
         retain: true
+        subPath: books
     resources:
       requests:
         memory: 250Mi
