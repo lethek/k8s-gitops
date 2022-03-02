@@ -77,13 +77,13 @@ spec:
 
       03-default-groups.ldif: |-
         dn: cn=Admins,ou=Groups,{{ LDAP_BASE_DN }}
-        objectClass: groupOfNames
+        objectClass: groupOfUniqueNames
         objectClass: top
         cn: Admins
-        member: uid=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
+        uniqueMember: uid=${SECRET_DEFAULT_USERNAME},ou=People,{{ LDAP_BASE_DN }}
 
         dn: cn=Users,ou=Groups,{{ LDAP_BASE_DN }}
-        objectClass: groupOfNames
+        objectClass: groupOfUniqueNames
         objectClass: top
         cn: Users
-        member:
+        uniqueMember:

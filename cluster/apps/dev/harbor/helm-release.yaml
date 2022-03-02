@@ -55,3 +55,4 @@ spec:
         trivy:
           storageClass: longhorn
           accessMode: ReadWriteMany
+    # TODO: Preconfigure env: https://goharbor.io/docs/latest/install-config/configure-user-settings-cli/#configure-users-settings-using-an-environment-variable

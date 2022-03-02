@@ -77,7 +77,7 @@ spec:
           additional_users_dn: "ou=People"
           additional_groups_dn: "ou=Groups"
           users_filter: "(&({username_attribute}={input})(objectClass=person))"
-          groups_filter: "(&(member={dn})(objectclass=groupOfNames))"
+          groups_filter: "(&(uniqueMember={dn})(objectclass=groupOfUniqueNames))"
           mail_attribute: mail
       access_control:
         ## Default policy can either be 'bypass', 'one_factor', 'two_factor' or 'deny'. It is the policy applied to any
