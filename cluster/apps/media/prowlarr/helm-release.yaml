@@ -5,8 +5,7 @@ metadata:
   name: prowlarr
   namespace: media
 spec:
-  releaseName: prowlarr
-  interval: 10m
+  interval: 5m
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
@@ -14,15 +13,18 @@ spec:
       version: 4.2.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: k8s-at-home-charts
         namespace: flux-system
   values:
     image:
-      repository: ghcr.io/k8s-at-home/prowlarr-nightly
-      tag: v0.2.0.1552
+      repository: linuxserver/prowlarr
+      tag: nightly
+    env:
+      TZ: "Australia/Brisbane"
     ingress:
       main:
         enabled: true
+        ingressClassName: nginx
         annotations:
           kubernetes.io/tls-acme: "true"
           hajimari.io/enable: "true"
