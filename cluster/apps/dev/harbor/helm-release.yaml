@@ -58,9 +58,9 @@ spec:
         trivy:
           storageClass: longhorn
           accessMode: ReadWriteMany
+  #Patch the helm release to set environment variables from harbor-config secret
   postRenderers:
     - kustomize:
-        # TODO: Preconfigure env: https://goharbor.io/docs/latest/install-config/configure-user-settings-cli/#configure-users-settings-using-an-environment-variable
         patchesStrategicMerge:
           - kind: Deployment
             apiVersion: apps/v1
