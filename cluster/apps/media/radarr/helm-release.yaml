@@ -41,6 +41,18 @@ spec:
           - secretName: radarr-tls
             hosts:
               - radarr.${SECRET_DOMAIN}
+      api:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: radarr.${SECRET_DOMAIN}
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: radarr-tls
+            hosts:
+              - radarr.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true
