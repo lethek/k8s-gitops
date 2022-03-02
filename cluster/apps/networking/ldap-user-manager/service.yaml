@@ -9,7 +9,7 @@ spec:
   selector:
     app: ldap-user-manager
   ports:
-    - name: https
+    - name: http
       protocol: TCP
-      port: 443
-      targetPort: https
+      port: 80
+      targetPort: http

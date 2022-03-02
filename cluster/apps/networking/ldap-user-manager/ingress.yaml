@@ -23,4 +23,4 @@ spec:
               service:
                 name: ldap-user-manager
                 port:
-                  number: 443
+                  number: 80
