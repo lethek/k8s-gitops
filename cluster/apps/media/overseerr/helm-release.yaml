@@ -37,6 +37,18 @@ spec:
           - secretName: overseerr-tls
             hosts:
               - overseerr.${SECRET_DOMAIN}
+      api:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: overseerr.${SECRET_DOMAIN}
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: overseerr-tls
+            hosts:
+              - overseerr.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true

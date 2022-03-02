@@ -41,6 +41,18 @@ spec:
           - secretName: readarr-tls
             hosts:
               - readarr.${SECRET_DOMAIN}
+      api:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: readarr.${SECRET_DOMAIN}
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: readarr-tls
+            hosts:
+              - readarr.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true

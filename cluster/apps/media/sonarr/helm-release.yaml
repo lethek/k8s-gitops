@@ -41,6 +41,18 @@ spec:
           - secretName: sonarr-tls
             hosts:
               - sonarr.${SECRET_DOMAIN}
+      api:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: sonarr.${SECRET_DOMAIN}
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: sonarr-tls
+            hosts:
+              - sonarr.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true

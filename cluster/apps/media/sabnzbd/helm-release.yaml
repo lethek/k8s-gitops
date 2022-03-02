@@ -38,6 +38,18 @@ spec:
           - secretName: sabnzbd-tls
             hosts:
               - sabnzbd.${SECRET_DOMAIN}
+      api:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: sabnzbd.${SECRET_DOMAIN}
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - secretName: sabnzbd-tls
+            hosts:
+              - sabnzbd.${SECRET_DOMAIN}
     persistence:
       config:
         enabled: true
