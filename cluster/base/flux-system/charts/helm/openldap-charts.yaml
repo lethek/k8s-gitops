@@ -5,6 +5,6 @@ metadata:
   name: openldap-charts
   namespace: flux-system
 spec:
-  interval: 15m
+  interval: 30m
   url: https://jp-gouin.github.io/helm-openldap/
   timeout: 3m
