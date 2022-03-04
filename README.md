@@ -27,7 +27,7 @@ This repository is forked from the excellent [Kubernetes @Home template cluster]
 - [Prerequisites](#-prerequisites)
 - [Repository structure](#-repository-structure)
 - [Lets go!](#-lets-go)
-- [Post installation](#-installation)
+- [Post installation](#-post-installation)
 - [Thanks](#-thanks)
 
 ## 👋 Introduction
