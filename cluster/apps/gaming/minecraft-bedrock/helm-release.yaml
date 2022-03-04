@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minecraft-bedrock
+  namespace: gaming
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: minecraft-bedrock
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: minecraft-charts
+        namespace: flux-system
+  values:
+    minecraftServer:
+      eula: true
+      whitelist: true
+      whitelistUsers: lethek,M4Xinfinity,KeyMeteor680060,Sharon XZhu
+      # ops: 2533274842615946
+      # members: 2535416769346406
+      defaultPermission: member
+      onlineMode: true
+      playerIdleTimeout: 30
+      maxPlayers: 10
+      tickDistance: 4
+      viewDistance: 10
+      serverName: SMMX
+      levelName: Survival
+      levelType: DEFAULT
+      difficulty: easy
+      gameMode: survival
+      cheats: true
+      serviceType: LoadBalancer
+      loadBalancerIP: "${LB_MINECRAFT_ADDR}"
+    persistence:
+      dataDir:
+        enabled: true
+        storageClass: longhorn
+        Size: 1Gi

@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - dev
   - default
+  - gaming
   - home
   - ingress-nginx
   - kasten-io
