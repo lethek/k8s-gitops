@@ -40,18 +40,17 @@ spec:
     ingress:
       create: true
       host: k10.${SECRET_DOMAIN}
-      urlPath: ""
+      urlPath: "k10"
       annotations:
         kubernetes.io/tls-acme: "true"
         kubernetes.io/ingress.class: nginx
         hajimari.io/enable: "true"
         hajimari.io/icon: backup-restore
         hajimari.io/appName: "K10"
-        hajimari.io/url: "https://k10.${SECRET_DOMAIN}/"
+        hajimari.io/url: "https://k10.${SECRET_DOMAIN}/k10/"
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
         nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
         nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
-        nginx.ingress.kubernetes.io/rewrite-target: "/k10$$0"
       hosts:
         - k10.${SECRET_DOMAIN}
       tls:
