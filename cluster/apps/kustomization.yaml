@@ -5,6 +5,7 @@ resources:
   - default
   - home
   - ingress-nginx
+  - kasten-io
   - kube-system
   - media
   - networking
