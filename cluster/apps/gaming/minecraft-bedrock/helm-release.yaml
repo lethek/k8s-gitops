@@ -19,7 +19,7 @@ spec:
       eula: true
       whitelist: true
       whitelistUsers: lethek,M4Xinfinity,KeyMeteor680060,Sharon XZhu
-      # ops: 2533274842615946
+      ops: 2533274842615946
       # members: 2535416769346406
       defaultPermission: member
       onlineMode: true
