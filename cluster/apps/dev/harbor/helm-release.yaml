@@ -28,6 +28,7 @@ spec:
         ingressClassName: nginx
         annotations:
           kubernetes.io/tls-acme: "true"
+          hajimari.io/appName: "Harbor"
           hajimari.io/enable: "true"
           hajimari.io/icon: "docker"
         hosts:

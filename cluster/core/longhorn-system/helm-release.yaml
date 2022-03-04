@@ -40,3 +40,4 @@ spec:
         nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
         hajimari.io/enable: "true"
         hajimari.io/icon: "harddisk"
+        hajimari.io/appName: "Longhorn"
