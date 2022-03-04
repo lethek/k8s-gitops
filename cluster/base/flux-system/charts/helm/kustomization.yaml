@@ -4,7 +4,6 @@ resources:
   - authelia-charts.yaml
   - bitnami-charts.yaml
   - datalust-charts.yaml
-  - descheduler-charts.yaml
   - emberstack-charts.yaml
   - external-dns-charts.yaml
   - grafana-charts.yaml
