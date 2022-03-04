@@ -10,7 +10,7 @@ _... managed with Flux and Renovate_ 🤖
 <div align="center">
 
 [![Discord](https://img.shields.io/discord/673534664354430999?style=for-the-badge&label=discord&logo=discord&logoColor=white)](https://discord.gg/k8s-at-home)
-[![K3S](https://img.shields.io/badge/k3s-v1.23.3-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
+[![K3S](https://img.shields.io/badge/k3s-v1.23.4-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
 [![Lines of code](https://img.shields.io/tokei/lines/github/lethek/k8s-gitops?style=for-the-badge&color=brightgreen&label=lines&logo=codefactor&logoColor=white)](https://github.com/lethek/k8s-gitops/graphs/contributors)
   
