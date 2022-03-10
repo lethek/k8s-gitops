@@ -33,6 +33,9 @@ spec:
           01-init-authelia.sql: |
             CREATE USER authelia;
             CREATE DATABASE authelia WITH OWNER = authelia;
+
+            CREATE USER keycloak;
+            CREATE DATABASE keycloak WITH OWNER = keycloak;
     auth:
       postgresPassword: "${SECRET_DEFAULT_PASSWORD}"
     ldap:
