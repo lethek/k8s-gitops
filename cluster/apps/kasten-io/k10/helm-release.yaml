@@ -20,11 +20,11 @@ spec:
     createNamespace: true
     crds: CreateReplace
     remediation:
-      retries: -1
+      retries: 3
   upgrade:
     crds: CreateReplace
     remediation:
-      retries: -1
+      retries: 3
   values:
     eula:
       accept: true
