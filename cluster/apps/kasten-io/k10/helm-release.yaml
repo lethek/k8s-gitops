@@ -36,7 +36,7 @@ spec:
         size: 1Gi
     auth:
       tokenAuth:
-        enabled: true
+        enabled: false
     ingress:
       create: true
       host: k10.${SECRET_DOMAIN}
