@@ -36,7 +36,31 @@ spec:
         size: 1Gi
     auth:
       tokenAuth:
+        enabled: false
+      ldap:
         enabled: true
+        restartPod: true
+        insecureNoSSL: true
+        insecureSkipVerifySSL: true
+        dashboardURL: "https://k10.${SECRET_DOMAIN}/k10"
+        host: "openldap-openldap-stack-ha.networking.svc.cluster.local:389"
+        bindDN: "cn=admin,${LDAP_BASE_DN}"
+        bindPW: "${SECRET_DEFAULT_PASSWORD}"
+        userSearch:
+          baseDN: "ou=People,${LDAP_BASE_DN}"
+          filter: "(objectClass=person)"
+          username: uid
+          idAttr: uid
+          emailAttr: mail
+          nameAttr: cn
+          preferredUsernameAttr: uid
+        groupSearch:
+          baseDN: "ou=Groups,${LDAP_BASE_DN}"
+          filter: "(objectClass=groupOfUniqueNames)"
+          nameAttr: cn
+          userMatchers:
+            - userAttr: dn
+              groupAttr: uniqueMember
     ingress:
       create: true
       host: k10.${SECRET_DOMAIN}
