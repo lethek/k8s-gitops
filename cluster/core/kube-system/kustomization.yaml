@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - kube-vip
   - nfs-client-provisioner
-  - snapshotter-controller
+  - snapshot-controller
