@@ -37,6 +37,8 @@ spec:
     auth:
       groupAllowList:
         - Admins
+      k10AdminGroups:
+        - Admins
       tokenAuth:
         enabled: false
       ldap:
