@@ -41,6 +41,8 @@ spec:
         - Admins
       tokenAuth:
         enabled: false
+      oidcAuth:
+        enabled: false
       ldap:
         enabled: true
         restartPod: true
