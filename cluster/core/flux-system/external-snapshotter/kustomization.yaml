@@ -1,15 +1,4 @@
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: external-snapshotter-controller
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: external-snapshotter-crds
-  interval: 1h0m0s
-  path: ./deploy/kubernetes/snapshot-controller
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: external-snapshotter-source
+resources:
+  - external-snapshotter.yaml
