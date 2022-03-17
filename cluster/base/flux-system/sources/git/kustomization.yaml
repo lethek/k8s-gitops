@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - external-dns-source.yaml
   - external-snapshotter-source.yaml
+  - traefik-crd-source.yaml
