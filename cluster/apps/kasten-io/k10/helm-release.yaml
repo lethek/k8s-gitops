@@ -35,6 +35,8 @@ spec:
         storageClass: longhorn
         size: 1Gi
     auth:
+      groupAllowList:
+        - Admins
       tokenAuth:
         enabled: false
       ldap:

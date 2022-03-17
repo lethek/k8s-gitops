@@ -105,6 +105,7 @@ spec:
               - alert-manager.${SECRET_DOMAIN}
               - prometheus.${SECRET_DOMAIN}
               - longhorn.${SECRET_DOMAIN}
+              - k10.${SECRET_DOMAIN}
             subject: ["group:Users"]
             policy: deny
 
