@@ -17,6 +17,6 @@ spec:
         app: multitool
     spec:
       containers:
-      - name: multitool
-        image: wbitt/network-multitool:latest
+        - name: multitool
+          image: wbitt/network-multitool:latest
       restartPolicy: Always
