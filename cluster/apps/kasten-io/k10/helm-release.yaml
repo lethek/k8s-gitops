@@ -40,11 +40,9 @@ spec:
       k10AdminGroups:
         - Admins
       tokenAuth:
-        enabled: false
-      oidcAuth:
-        enabled: false
-      ldap:
         enabled: true
+      ldap:
+        enabled: false
         restartPod: true
         insecureNoSSL: true
         insecureSkipVerifySSL: true
