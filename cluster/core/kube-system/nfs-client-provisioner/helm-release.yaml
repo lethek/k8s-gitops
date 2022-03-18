@@ -29,4 +29,3 @@ spec:
     storageClass:
       defaultClass: false
       archiveOnDelete: true
-      pathPattern: "${.PVC.namespace}-${.PVC.name}"
