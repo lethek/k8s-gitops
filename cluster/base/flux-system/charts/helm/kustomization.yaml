@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - authelia-charts.yaml
   - bitnami-charts.yaml
+  - csi-driver-nfs-charts.yaml
   - datalust-charts.yaml
   - emberstack-charts.yaml
   - external-dns-charts.yaml
