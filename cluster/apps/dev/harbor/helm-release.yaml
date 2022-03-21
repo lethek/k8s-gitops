@@ -36,7 +36,7 @@ spec:
       tls:
         enabled: true
         certSource: secret
-        secret: 
+        secret:
           secretName: harbor-tls
     persistence:
       persistentVolumeClaim:
@@ -59,7 +59,7 @@ spec:
         trivy:
           storageClass: longhorn
           accessMode: ReadWriteMany
-  #Patch the helm release to set environment variables from harbor-config secret
+  # Patch the helm release to set environment variables from harbor-config secret
   postRenderers:
     - kustomize:
         patchesStrategicMerge:
