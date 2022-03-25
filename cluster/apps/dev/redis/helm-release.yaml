@@ -30,6 +30,7 @@ spec:
           metallb.universe.tf/loadBalancerIPs: "${LB_REDIS_ADDR}"
       persistence:
         enabled: true
+        storageClass: longhorn
         size: 256Mi
     tls:
       enabled: false

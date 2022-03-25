@@ -34,6 +34,11 @@ spec:
       persistence:
         storageClass: longhorn
         size: 1Gi
+    prometheus:
+      server:
+        persistentVolume:
+          size: 1Gi
+          storageClass: shorthorn
     auth:
       groupAllowList:
         - Admins
