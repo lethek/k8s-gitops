@@ -21,6 +21,7 @@ spec:
     persistence:
       reclaimPolicy: Retain
       defaultClassReplicaCount: 2
+      defaultClass: false
     defaultSettings:
       storageMinimalAvailablePercentage: 10
       backupTarget: nfs://${SVC_NAS_ADDR}:/volume1/backups/longhorn
