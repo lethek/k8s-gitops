@@ -15,6 +15,9 @@ spec:
         kind: HelmRepository
         name: csi-driver-nfs-charts
         namespace: flux-system
+  upgrade:
+    remediation:
+      strategy: uninstall
   values:
     kubeletDir: /var/lib/kubelet
     controller:
