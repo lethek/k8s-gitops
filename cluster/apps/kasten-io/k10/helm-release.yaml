@@ -32,11 +32,27 @@ spec:
       email: ${SECRET_DEFAULT_EMAIL}
     global:
       persistence:
+        enabled: true
         storageClass: longhorn
         size: 1Gi
+        catalog:
+          size: 2Gi
+        grafana:
+          size: 1Gi
+        jobs:
+          size: 1Gi
+        logging:
+          size: 1Gi
+        metering:
+          size: 1Gi
     prometheus:
       server:
         persistentVolume:
+          size: 1Gi
+          storageClass: shorthorn
+    grafana:
+      global:
+        persistence:
           size: 1Gi
           storageClass: shorthorn
     auth:
