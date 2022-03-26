@@ -51,6 +51,7 @@ spec:
           size: 1Gi
           storageClass: shorthorn
     grafana:
+      enabled: false
       global:
         persistence:
           size: 1Gi
