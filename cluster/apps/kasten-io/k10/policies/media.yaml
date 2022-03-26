@@ -32,6 +32,10 @@ spec:
         receiveString: ""
         exportData:
           enabled: true
+          overrides:
+            - storageClassName: longhorn
+              enabled: true
+              exporterStorageClassName: shorthorn
       retention: {}
   retention:
     weekly: 4
