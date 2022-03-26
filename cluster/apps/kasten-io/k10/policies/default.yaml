@@ -1,0 +1,34 @@
+---
+apiVersion: config.kio.kasten.io/v1alpha1
+kind: Policy
+metadata:
+  name: default
+  namespace: kasten-io
+spec:
+  comment: ""
+  frequency: "@daily"
+  paused: false
+  actions:
+    - action: backup
+    - action: export
+      exportParameters:
+        frequency: "@daily"
+        migrationToken:
+          name: ""
+          namespace: ""
+        profile:
+          name: default
+          namespace: kasten-io
+        receiveString: ""
+        exportData:
+          enabled: true
+      retention: {}
+  retention:
+    daily: 7
+    weekly: 1
+  selector:
+    matchExpressions:
+      - key: k10.kasten.io/appNamespace
+        operator: In
+        values:
+          - default

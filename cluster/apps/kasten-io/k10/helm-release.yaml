@@ -33,7 +33,7 @@ spec:
     global:
       persistence:
         enabled: true
-        storageClass: longhorn
+        storageClass: shorthorn
         size: 1Gi
         catalog:
           size: 2Gi
