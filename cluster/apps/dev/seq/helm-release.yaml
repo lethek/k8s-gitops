@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.datalust.co/
       chart: seq
-      version: 2021.4.7192
+      version: 2022.1.7378
       sourceRef:
         kind: HelmRepository
         name: datalust-charts
