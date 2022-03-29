@@ -16,9 +16,6 @@ spec:
         name: k8s-at-home-charts
         namespace: flux-system
   values:
-    image:
-      repository: linuxserver/sonarr
-      tag: latest
     env:
       TZ: "Australia/Brisbane"
     ingress:
@@ -56,17 +53,11 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
+        storageClass: shorthorn
         accessMode: ReadWriteOnce
         size: "1Gi"
       media:
         enabled: true
-        existingClaim: nfs-media-shared-videos-pvc
-        accessMode: ReadWriteMany
-        retain: true
-      newmedia:
-        enabled: true
-        mountPath: "newmedia"
         existingClaim: nfs-shared-media-pvc
         accessMode: ReadWriteMany
         retain: true
