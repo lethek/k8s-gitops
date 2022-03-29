@@ -1,0 +1,84 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: test
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: qbittorrent
+      version: 13.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/qbittorrent
+      tag: v4.4.2
+    controller:
+      enabled: true
+      replicas: 1
+      strategy: Recreate
+    settings:
+      automaticPortSetup: true
+    env:
+      TZ: "Australia/Brisbane"
+    podSecurityContext:
+      supplementalGroups:
+        - 1042
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+      bittorrent:
+        enabled: true
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_BITTORRENT_ADDR}"
+        externalTrafficPolicy: Local
+        ports:
+          bittorrent:
+            enabled: true
+            port: 50413
+            protocol: TCP
+            targetPort: 50413
+    persistence:
+      config:
+        enabled: true
+      media:
+        enabled: true
+        type: pvc
+        mountPath: /media
+        existingClaim: media
+      downloads:
+        enabled: true
+        type: pvc
+        mountPath: /bittorrent
+        existingClaim: nfs-test-shared-downloads-pvc
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_hide_header "x-webkit-csp";
+            proxy_hide_header "content-security-policy";
+            proxy_hide_header "X-Frame-Options";
+            proxy_set_header Accept-Encoding "";
+            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/nord.css"></head>';
+            sub_filter_once on;
+        hosts:
+          - host: &host "torrent.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: qbittorrent-tls
+            hosts:
+              - *host

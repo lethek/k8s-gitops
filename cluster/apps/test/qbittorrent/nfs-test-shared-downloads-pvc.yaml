@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-test-torrents-downloads-pv
+  name: nfs-test-shared-downloads-pv
 spec:
-  storageClassName: nfs-test-torrents-downloads
+  storageClassName: nfs-test-shared-downloads
   capacity:
     storage: 1Mi
   accessModes:
@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${SVC_NAS_ADDR}
-    path: /volume1/torrents/downloads
+    path: /volume1/share/downloads
   mountOptions:
     - nfsvers=4.1
     - tcp
@@ -24,12 +24,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-test-torrents-downloads-pvc
+  name: nfs-test-shared-downloads-pvc
   namespace: test
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs-test-torrents-downloads
+  storageClassName: nfs-test-shared-downloads
   resources:
     requests:
       storage: 1Mi
