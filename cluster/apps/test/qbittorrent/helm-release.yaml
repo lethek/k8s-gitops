@@ -54,7 +54,7 @@ spec:
         enabled: true
         mountPath: /downloads
         type: pvc
-        subPath: /bittorrent
+        subPath: bittorrent
         existingClaim: nfs-test-shared-downloads-pvc
     ingress:
       main:
