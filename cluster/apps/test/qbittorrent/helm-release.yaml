@@ -50,15 +50,11 @@ spec:
     persistence:
       config:
         enabled: true
-      media:
-        enabled: true
-        type: pvc
-        mountPath: /media
-        existingClaim: media
       downloads:
         enabled: true
+        mountPath: /downloads
         type: pvc
-        mountPath: /bittorrent
+        subPath: /bittorrent
         existingClaim: nfs-test-shared-downloads-pvc
     ingress:
       main:
