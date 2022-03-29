@@ -20,7 +20,7 @@ spec:
       repository: linuxserver/sabnzbd
       tag: latest
     env:
-      TZ: "Australia/Brisbane"
+      TZ: "${DEFAULT_TIMEZONE}"
     ingress:
       main:
         enabled: true

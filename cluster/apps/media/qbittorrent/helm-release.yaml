@@ -37,7 +37,7 @@ spec:
       QBT_Preferences__Downloads__TempPath: "/downloads/incomplete/"
       QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: "false"
       QBT_Preferences__WebUI__Username: "${SECRET_DEFAULT_USERNAME}"
-      TZ: "Australia/Brisbane"
+      TZ: "${DEFAULT_TIMEZONE}"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568

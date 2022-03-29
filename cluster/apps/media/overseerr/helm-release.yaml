@@ -19,7 +19,7 @@ spec:
       repository: linuxserver/overseerr
       tag: latest
     env:
-      TZ: "Australia/Brisbane"
+      TZ: "${DEFAULT_TIMEZONE}"
     ingress:
       main:
         enabled: true

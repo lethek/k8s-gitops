@@ -5,6 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  DEFAULT_TIMEZONE: "${BOOTSTRAP_DEFAULT_TIMEZONE}"
   LDAP_BASE_DN: "${BOOTSTRAP_LDAP_BASE_DN}"
   SVC_NAS_ADDR: "${BOOTSTRAP_SVC_NAS_ADDR}"
   SVC_PLEX_ADDR: "${BOOTSTRAP_SVC_PLEX_ADDR}"

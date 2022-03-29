@@ -20,7 +20,7 @@ spec:
       repository: ghcr.io/k8s-at-home/readarr-nightly
       tag: v0.1.1.1287
     env:
-      TZ: "Australia/Brisbane"
+      TZ: "${DEFAULT_TIMEZONE}"
     ingress:
       main:
         enabled: true

@@ -17,7 +17,7 @@ spec:
         namespace: flux-system
   values:
     env:
-      TZ: "Australia/Brisbane"
+      TZ: "${DEFAULT_TIMEZONE}"
       PASSWORD: "${SECRET_DEFAULT_PASSWORD}"
     service:
       main:
