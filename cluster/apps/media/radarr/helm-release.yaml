@@ -71,6 +71,12 @@ spec:
         accessMode: ReadWriteMany
         retain: true
         subPath: movies
+      downloads:
+        enabled: true
+        mountPath: /downloads
+        existingClaim: nfs-shared-downloads-pvc
+        accessMode: ReadWriteMany
+        retain: true
     resources:
       requests:
         memory: 250Mi
