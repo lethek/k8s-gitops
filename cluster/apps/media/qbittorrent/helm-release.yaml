@@ -24,13 +24,12 @@ spec:
       replicas: 1
       strategy: Recreate
     settings:
-      automaticPortSetup: false
+      automaticPortSetup: true
     env:
       QBT_BitTorrent__Session__DefaultSavePath: "/downloads/complete/"
       QBT_BitTorrent__Session__MaxActiveDownloads: "10"
       QBT_BitTorrent__Session__MaxActiveTorrents: "20"
       QBT_BitTorrent__Session__MaxActiveUploads: "10"
-      QBT_BitTorrent__Session__Port: "50413"
       QBT_BitTorrent__Session__QueueingSystemEnabled: "true"
       QBT_BitTorrent__Session__TempPath: "/downloads/incomplete/"
       QBT_BitTorrent__Session__TempPathEnabled: "true"
@@ -53,9 +52,9 @@ spec:
         ports:
           bittorrent:
             enabled: true
-            port: 50413
+            port: 6881
             protocol: TCP
-            targetPort: 50413
+            targetPort: 6881
     persistence:
       config:
         enabled: true
