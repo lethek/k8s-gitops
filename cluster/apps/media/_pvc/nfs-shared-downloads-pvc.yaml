@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-test-shared-downloads-pv
+  name: nfs-shared-downloads-pv
 spec:
-  storageClassName: nfs-test-shared-downloads
+  storageClassName: nfs-shared-downloads
   capacity:
     storage: 1Mi
   accessModes:
@@ -24,12 +24,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-test-shared-downloads-pvc
-  namespace: test
+  name: nfs-shared-downloads-pvc
+  namespace: media
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs-test-shared-downloads
+  storageClassName: nfs-shared-downloads
   resources:
     requests:
       storage: 1Mi

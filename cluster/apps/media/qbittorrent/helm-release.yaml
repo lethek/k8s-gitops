@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: qbittorrent
-  namespace: test
+  namespace: media
 spec:
   interval: 5m
   chart:
@@ -24,17 +24,26 @@ spec:
       replicas: 1
       strategy: Recreate
     settings:
-      automaticPortSetup: true
+      automaticPortSetup: false
     env:
+      QBT_BitTorrent__Session__DefaultSavePath: "/downloads/complete/"
+      QBT_BitTorrent__Session__MaxActiveDownloads: "10"
+      QBT_BitTorrent__Session__MaxActiveTorrents: "20"
+      QBT_BitTorrent__Session__MaxActiveUploads: "10"
+      QBT_BitTorrent__Session__Port: "50413"
+      QBT_BitTorrent__Session__QueueingSystemEnabled: "true"
+      QBT_BitTorrent__Session__TempPath: "/downloads/incomplete/"
+      QBT_BitTorrent__Session__TempPathEnabled: "true"
+      QBT_Preferences__Downloads__SavePath: "/downloads/complete/"
+      QBT_Preferences__Downloads__TempPath: "/downloads/incomplete/"
+      QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: "false"
+      QBT_Preferences__WebUI__Username: "${SECRET_DEFAULT_USERNAME}"
       TZ: "Australia/Brisbane"
     podSecurityContext:
-      supplementalGroups:
-        - 1042
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
     service:
-      main:
-        ports:
-          http:
-            port: 8080
       bittorrent:
         enabled: true
         type: LoadBalancer
@@ -50,28 +59,23 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
+        storageClass: shorthorn
         accessMode: ReadWriteOnce
         size: "1Gi"
-      media:
+      downloads:
         enabled: true
-        mountPath: /downloads
         type: pvc
         subPath: bittorrent
-        existingClaim: nfs-test-shared-downloads-pvc
+        existingClaim: nfs-shared-downloads-pvc
     ingress:
       main:
         enabled: true
         ingressClassName: nginx
         annotations:
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            proxy_hide_header "x-webkit-csp";
-            proxy_hide_header "content-security-policy";
-            proxy_hide_header "X-Frame-Options";
-            proxy_set_header Accept-Encoding "";
-            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/nord.css"></head>';
-            sub_filter_once on;
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
         hosts:
           - host: &host "torrent.${SECRET_DOMAIN}"
             paths:
