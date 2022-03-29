@@ -51,8 +51,6 @@ spec:
       config:
         enabled: true
       media:
-        enabled: false
-      downloads:
         enabled: true
         mountPath: /downloads
         type: pvc
