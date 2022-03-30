@@ -21,6 +21,12 @@ spec:
       tag: v3.0.7.1477
     env:
       TZ: "${DEFAULT_TIMEZONE}"
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      supplementalGroups:
+        - 100
     ingress:
       main:
         enabled: true
@@ -53,30 +59,24 @@ spec:
           - secretName: sonarr-tls
             hosts:
               - *host
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      supplementalGroups:
-        - 100
     persistence:
       config:
         enabled: true
         storageClass: shorthorn
         accessMode: ReadWriteOnce
         size: "1Gi"
-      media:
-        enabled: true
-        existingClaim: nfs-shared-media-pvc
-        accessMode: ReadWriteMany
-        retain: true
-        subPath: tv
       downloads:
         enabled: true
         mountPath: /downloads
         existingClaim: nfs-shared-downloads-pvc
         accessMode: ReadWriteMany
         retain: true
+      media:
+        enabled: true
+        existingClaim: nfs-shared-media-pvc
+        accessMode: ReadWriteMany
+        retain: true
+        subPath: tv
     resources:
       requests:
         memory: 250Mi
