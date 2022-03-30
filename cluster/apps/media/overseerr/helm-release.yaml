@@ -53,7 +53,7 @@ spec:
       config:
         accessMode: ReadWriteOnce
         enabled: true
-        mountPath: /app/config
+        mountPath: /config
         size: 1Gi
         storageClass: shorthorn
     resources:
