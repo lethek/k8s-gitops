@@ -19,9 +19,9 @@ spec:
     csi:
       kubeletRootDir: /var/lib/kubelet
     persistence:
-      reclaimPolicy: Retain
+      reclaimPolicy: Delete
       defaultClassReplicaCount: 2
-      defaultClass: false
+      defaultClass: true
     defaultSettings:
       storageMinimalAvailablePercentage: 10
       backupTarget: nfs://${SVC_NAS_ADDR}:/volume1/backups/longhorn

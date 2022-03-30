@@ -33,7 +33,7 @@ spec:
           overrides:
             - storageClassName: longhorn
               enabled: true
-              exporterStorageClassName: shorthorn
+              exporterStorageClassName: longhorn
       retention: {}
   retention:
     weekly: 4

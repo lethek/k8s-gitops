@@ -62,7 +62,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: shorthorn
+        storageClass: longhorn
         accessMode: ReadWriteOnce
         size: "1Gi"
     resources:

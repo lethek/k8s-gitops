@@ -33,7 +33,7 @@ spec:
     global:
       persistence:
         enabled: true
-        storageClass: shorthorn
+        storageClass: longhorn
         size: 1Gi
         catalog:
           size: 2Gi
@@ -49,13 +49,13 @@ spec:
       server:
         persistentVolume:
           size: 1Gi
-          storageClass: shorthorn
+          storageClass: longhorn
     grafana:
       enabled: false
       global:
         persistence:
           size: 1Gi
-          storageClass: shorthorn
+          storageClass: longhorn
     auth:
       groupAllowList:
         - Admins

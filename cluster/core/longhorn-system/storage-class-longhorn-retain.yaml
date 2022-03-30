@@ -2,11 +2,11 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: shorthorn
+  name: longhorn-retain
   annotations:
-    storageclass.kubernetes.io/is-default-class: 'true'
+    storageclass.kubernetes.io/is-default-class: 'false'
 provisioner: driver.longhorn.io
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
 parameters:
