@@ -65,6 +65,7 @@ spec:
         storageClass: longhorn
         accessMode: ReadWriteOnce
         size: "100Mi"
+        retain: true
       downloads:
         enabled: true
         existingClaim: nfs-shared-downloads-pvc
