@@ -17,10 +17,16 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: linuxserver/sabnzbd
-      tag: latest
+      repository: ghcr.io/k8s-at-home/sabnzbd
+      tag: v3.5.3
     env:
       TZ: "${DEFAULT_TIMEZONE}"
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      supplementalGroups:
+        - 100
     ingress:
       main:
         enabled: true
@@ -33,37 +39,38 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
         hosts:
-          - host: sabnzbd.${SECRET_DOMAIN}
+          - host: &host "sabnzbd.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: sabnzbd-tls
             hosts:
-              - sabnzbd.${SECRET_DOMAIN}
+              - *host
       api:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: sabnzbd.${SECRET_DOMAIN}
+          - host: *host
             paths:
               - path: /api
                 pathType: Prefix
         tls:
           - secretName: sabnzbd-tls
             hosts:
-              - sabnzbd.${SECRET_DOMAIN}
+              - *host
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
+        storageClass: shorthorn
         accessMode: ReadWriteOnce
         size: "100Mi"
       downloads:
         enabled: true
-        existingClaim: nfs-media-shared-videos-pvc
+        existingClaim: nfs-shared-downloads-pvc
         accessMode: ReadWriteMany
-        subPath: Downloads
+        retain: true
+        subPath: usenet
     resources:
       requests:
         memory: 250Mi
