@@ -14,9 +14,7 @@ spec:
         filters:
           includeResources: []
           excludeResources:
-            - name: nfs-media-shared-downloads-pvc
-              resource: persistentvolumeclaims
-            - name: nfs-media-shared-videos-pvc
+            - name: nfs-shared-downloads-pvc
               resource: persistentvolumeclaims
             - name: nfs-shared-media-pvc
               resource: persistentvolumeclaims
