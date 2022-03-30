@@ -17,8 +17,8 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: linuxserver/prowlarr
-      tag: nightly
+      repository: ghcr.io/k8s-at-home/prowlarr
+      tag: v0.2.0.1621
     env:
       TZ: "${DEFAULT_TIMEZONE}"
     ingress:
@@ -33,30 +33,30 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
         hosts:
-          - host: prowlarr.${SECRET_DOMAIN}
+          - host: &host "prowlarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: prowlarr-tls
             hosts:
-              - prowlarr.${SECRET_DOMAIN}
+              - *host
       api:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: prowlarr.${SECRET_DOMAIN}
+          - host: *host
             paths:
               - path: /api
                 pathType: Prefix
         tls:
           - secretName: prowlarr-tls
             hosts:
-              - prowlarr.${SECRET_DOMAIN}
+              - *host
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
+        storageClass: shorthorn
         accessMode: ReadWriteOnce
         size: "1Gi"
     resources:
