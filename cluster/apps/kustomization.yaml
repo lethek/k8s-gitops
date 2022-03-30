@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - dev
   - default
+  - flux-system
   - gaming
   - home
   - ingress-nginx
