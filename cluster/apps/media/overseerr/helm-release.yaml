@@ -20,6 +20,12 @@ spec:
       tag: 1.28.0
     env:
       TZ: "${DEFAULT_TIMEZONE}"
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      supplementalGroups:
+        - 100
     ingress:
       main:
         enabled: true
@@ -29,26 +35,26 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "eye-circle"
         hosts:
-          - host: overseerr.${SECRET_DOMAIN}
+          - host: &host "overseerr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: overseerr-tls
             hosts:
-              - overseerr.${SECRET_DOMAIN}
+              - *host
       api:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: overseerr.${SECRET_DOMAIN}
+          - host: *host
             paths:
               - path: /api
                 pathType: Prefix
         tls:
           - secretName: overseerr-tls
             hosts:
-              - overseerr.${SECRET_DOMAIN}
+              - *host
     persistence:
       config:
         enabled: true
