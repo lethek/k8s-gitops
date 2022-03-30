@@ -56,6 +56,7 @@ spec:
         mountPath: /config
         size: 1Gi
         storageClass: longhorn
+        retain: true
     resources:
       requests:
         memory: 250Mi
