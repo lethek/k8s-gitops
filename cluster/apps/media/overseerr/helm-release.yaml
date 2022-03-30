@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: ghcr.io/sct/overseerr
+      repository: linuxserver/overseerr
       tag: 1.28.0
     env:
       TZ: "${DEFAULT_TIMEZONE}"
@@ -51,11 +51,11 @@ spec:
               - *host
     persistence:
       config:
-        enabled: true
-        storageClass: shorthorn
         accessMode: ReadWriteOnce
-        size: "1Gi"
-        mountPath: /config
+        enabled: true
+        mountPath: /app/config
+        size: 1Gi
+        storageClass: shorthorn
     resources:
       requests:
         memory: 250Mi
