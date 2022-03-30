@@ -16,8 +16,8 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: linuxserver/overseerr
-      tag: latest
+      repository: ghcr.io/sct/overseerr
+      tag: 1.28.0
     env:
       TZ: "${DEFAULT_TIMEZONE}"
     ingress:
@@ -52,7 +52,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
+        storageClass: shorthorn
         accessMode: ReadWriteOnce
         size: "1Gi"
         mountPath: /config
