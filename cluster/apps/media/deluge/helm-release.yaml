@@ -126,10 +126,10 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-              tls:
-                - secretName: code-deluge-tls
-                  hosts:
-                    - code-deluge.${SECRET_DOMAIN}
+          tls:
+            - secretName: code-deluge-tls
+              hosts:
+                - code-deluge.${SECRET_DOMAIN}
     secret:
       auth: |
         ${SECRET_DEFAULT_USERNAME}:${SECRET_DEFAULT_PASSWORD}:10
