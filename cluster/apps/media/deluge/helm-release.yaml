@@ -1,0 +1,198 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: deluge
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: deluge
+      version: 5.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    #https://github.com/k8s-at-home/charts/tree/master/charts/stable/deluge
+    #https://docs.linuxserver.io/images/docker-deluge
+    image:
+      repository: linuxserver/deluge
+      tag: 2.0.5
+    env:
+      TZ: "Australia/Brisbane"
+    podSecurityContext:
+      supplementalGroups:
+        - 100
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "cloud-download"
+        hosts:
+          - host: &host "deluge.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: deluge-tls
+            hosts:
+              - *host
+    service:
+      bittorrent:
+        enabled: true
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_BITTORRENT_ADDR}"
+        externalTrafficPolicy: Local
+        ports:
+          bittorrent:
+            enabled: true
+            port: 6881
+            protocol: TCP
+            targetPort: 6881
+    persistence:
+      config:
+        enabled: true
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 128Mi
+      downloads:
+        enabled: true
+        existingClaim: nfs-shared-downloads-pvc
+        subPath: bittorrent
+      config-auth:
+        enabled: true
+        type: secret
+        name: deluge
+        readOnly: true
+        mountPath: "-"
+      config-templates:
+        enabled: true
+        type: configMap
+        name: deluge-templates
+        readOnly: true
+        mountPath: "-"
+    initContainers:
+      initialize:
+        image: ubuntu:bionic
+        tty: true
+        command: [ "/bin/sh" ]
+        args:
+          - -c
+          # [ ! -f /config/auth ] &&
+          - >-
+            cp -f /templates/config/* /config/ &&
+            cp -f /templates/secret/* /config/
+        volumeMounts:
+          - name: config
+            mountPath: /config
+          - name: config-auth
+            mountPath: /templates/secret
+          - name: config-templates
+            mountPath: /templates/config
+    secret:
+      auth: |
+        ${BOOTSTRAP_DEFAULT_USERNAME}:${BOOTSTRAP_DEFAULT_PASSWORD}:10
+    configmap:
+      templates:
+        enabled: true
+        data:
+          core.conf: |-
+            {
+              "file": 1,
+              "format": 1
+            }{
+              "add_paused": false,
+              "allow_remote": true,
+              "auto_manage_prefer_seeds": false,
+              "auto_managed": true,
+              "cache_expiry": 60,
+              "cache_size": 512,
+              "copy_torrent_file": false,
+              "daemon_port": 58846,
+              "del_copy_torrent_file": false,
+              "dht": true,
+              "dont_count_slow_torrents": false,
+              "download_location": "/downloads/incomplete",
+              "download_location_paths_list": [],
+              "enabled_plugins": [],
+              "enc_in_policy": 1,
+              "enc_level": 2,
+              "enc_out_policy": 1,
+              "geoip_db_location": "/usr/share/GeoIP/GeoIP.dat",
+              "ignore_limits_on_local_network": true,
+              "info_sent": 0.0,
+              "listen_interface": "",
+              "listen_ports": [6881, 6881],
+              "listen_random_port": null,
+              "listen_reuse_port": true,
+              "listen_use_sys_port": false,
+              "lsd": true,
+              "max_active_downloading": 10,
+              "max_active_limit": 16,
+              "max_active_seeding": 6,
+              "max_connections_global": 200,
+              "max_connections_per_second": 20,
+              "max_connections_per_torrent": -1,
+              "max_download_speed": -1.0,
+              "max_download_speed_per_torrent": -1,
+              "max_half_open_connections": 50,
+              "max_upload_slots_global": 4,
+              "max_upload_slots_per_torrent": -1,
+              "max_upload_speed": -1.0,
+              "max_upload_speed_per_torrent": -1,
+              "move_completed": true,
+              "move_completed_path": "/downloads/complete",
+              "move_completed_paths_list": [],
+              "natpmp": true,
+              "new_release_check": false,
+              "outgoing_interface": "",
+              "outgoing_ports": [0, 0],
+              "path_chooser_accelerator_string": "Tab",
+              "path_chooser_auto_complete_enabled": true,
+              "path_chooser_max_popup_rows": 20,
+              "path_chooser_show_chooser_button_on_localhost": true,
+              "path_chooser_show_hidden_files": false,
+              "peer_tos": "0x00",
+              "plugins_location": "/config/plugins",
+              "pre_allocate_storage": false,
+              "prioritize_first_last_pieces": false,
+              "proxy": {
+                "anonymous_mode": false,
+                "force_proxy": false,
+                "hostname": "",
+                "password": "",
+                "port": 8080,
+                "proxy_hostnames": true,
+                "proxy_peer_connections": true,
+                "proxy_tracker_connections": true,
+                "type": 0,
+                "username": ""
+              },
+              "queue_new_to_top": false,
+              "random_outgoing_ports": true,
+              "random_port": false,
+              "rate_limit_ip_overhead": true,
+              "remove_seed_at_ratio": false,
+              "seed_time_limit": 180,
+              "seed_time_ratio_limit": 7.0,
+              "send_info": false,
+              "sequential_download": false,
+              "share_ratio_limit": 2.0,
+              "shared": false,
+              "stop_seed_at_ratio": false,
+              "stop_seed_ratio": 2.0,
+              "super_seeding": false,
+              "torrentfiles_location": "/torrents",
+              "upnp": true,
+              "utpex": true
+            }

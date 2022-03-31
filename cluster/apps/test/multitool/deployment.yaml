@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: multitool
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:

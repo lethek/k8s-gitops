@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - _pvc/nfs-shared-downloads-pvc.yaml
   - _pvc/nfs-shared-media-pvc.yaml
+  - deluge
   - overseerr
   - prowlarr
-  - qbittorrent
   - radarr
   - readarr
   - sabnzbd
