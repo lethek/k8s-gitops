@@ -101,7 +101,7 @@ spec:
             mountPath: /templates/config
     secret:
       auth: |
-        ${BOOTSTRAP_DEFAULT_USERNAME}:${BOOTSTRAP_DEFAULT_PASSWORD}:10
+        ${SECRET_DEFAULT_USERNAME}:${SECRET_DEFAULT_PASSWORD}:10
     configmap:
       templates:
         enabled: true
