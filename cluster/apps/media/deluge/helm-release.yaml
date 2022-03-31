@@ -20,7 +20,7 @@ spec:
     #https://docs.linuxserver.io/images/docker-deluge
     image:
       repository: linuxserver/deluge
-      tag: 2.0.5
+      tag: 18.04.1
     env:
       TZ: "Australia/Brisbane"
     podSecurityContext:
