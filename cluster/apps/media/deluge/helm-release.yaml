@@ -22,7 +22,7 @@ spec:
       repository: linuxserver/deluge
       tag: 2.0.5
     env:
-      TZ: "Australia/Brisbane"
+      TZ: "${DEFAULT_TIMEZONE}"
     podSecurityContext:
       supplementalGroups:
         - 100
