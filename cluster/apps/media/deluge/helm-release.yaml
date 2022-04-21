@@ -83,7 +83,7 @@ spec:
         mountPath: "-"
     initContainers:
       initialize:
-        image: ubuntu:focal
+        image: ubuntu:jammy
         tty: true
         command: [ "/bin/sh" ]
         args:
