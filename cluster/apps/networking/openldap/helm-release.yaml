@@ -35,6 +35,13 @@ spec:
       LDAP_BASE_DN: "${LDAP_BASE_DN}"
     ltb-passwd:
       enabled: false
+    phpldapadmin:
+      enabled: true
+      ingress:
+        enabled: true
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_TEST_ADDR}"
     resources:
       requests:
         cpu: "10m"
