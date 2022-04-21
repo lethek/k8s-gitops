@@ -25,9 +25,14 @@ spec:
     configInline:
       address-pools:
         - name: default
-          protocol: layer2
+          protocol: bgp
+          avoid-buggy-ips: true
           addresses:
             - "${METALLB_LB_RANGE}"
+      peers:
+        - peer-address: "${GATEWAY_ADDR}"
+          peer-asn: 64512
+          my-asn: 64512
     controller:
       tolerations:
         - key: "arm"
