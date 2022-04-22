@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: openldap-stack-ha
-      version: 2.1.6
+      version: 3.0.0
       sourceRef:
         kind: HelmRepository
         name: openldap-charts
@@ -17,8 +17,11 @@ spec:
       interval: 5m
   values:
     replicaCount: 3
-    image:
-      pullPolicy: IfNotPresent
+    global:
+      storageClass: longhorn
+      ldapDomain: "${SECRET_DOMAIN}"
+      adminPassword: "${SECRET_DEFAULT_PASSWORD}"
+      configPassword: "${SECRET_DEFAULT_PASSWORD}"
     service:
       type: LoadBalancer
       annotations:
@@ -27,8 +30,6 @@ spec:
       enabled: true
       storageClass: longhorn
       size: 512Mi
-    adminPassword: "${SECRET_DEFAULT_PASSWORD}"
-    configPassword: "${SECRET_DEFAULT_PASSWORD}"
     env:
       LDAP_ORGANISATION: "${SECRET_DOMAIN}"
       LDAP_DOMAIN: "${SECRET_DOMAIN}"

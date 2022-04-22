@@ -16,8 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    #https://github.com/k8s-at-home/charts/tree/master/charts/stable/deluge
-    #https://docs.linuxserver.io/images/docker-deluge
+    # https://github.com/k8s-at-home/charts/tree/master/charts/stable/deluge
+    # https://docs.linuxserver.io/images/docker-deluge
     image:
       repository: linuxserver/deluge
       tag: 2.0.5
