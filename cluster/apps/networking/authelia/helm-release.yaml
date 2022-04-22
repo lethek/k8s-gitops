@@ -51,12 +51,11 @@ spec:
         - name: TZ
           value: "${DEFAULT_TIMEZONE}"
     resources:
-      limits:
-        cpu: "1.00"
-        memory: 128Mi
       requests:
         cpu: 25m
         memory: 50Mi
+      limits:
+        memory: 128Mi
     configMap:
       enabled: true
       theme: auto

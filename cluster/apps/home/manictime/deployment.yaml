@@ -40,9 +40,10 @@ spec:
         - name: manictime
           image: manictime/manictimeserver
           resources:
+            requests:
+              cpu: 100m
             limits:
               memory: "1Gi"
-              cpu: "1000m"
           ports:
             - containerPort: 8080
               name: manictime
