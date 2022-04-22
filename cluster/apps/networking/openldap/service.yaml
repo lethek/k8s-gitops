@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openldap-phpldapadmin
+  namespace: networking
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "${LB_TEST_ADDR}"
+  labels:
+    app: phpldapadmin
+    release: openldap
+spec:
+  type: LoadBalancer
+  # loadBalancerIP: "${LB_TEST_ADDR}"
+  externalTrafficPolicy: Local
+  selector:
+    app: phpldapadmin
+    release: openldap
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
