@@ -22,8 +22,6 @@ spec:
       ldapDomain: "${SECRET_DOMAIN}"
       adminPassword: "${SECRET_DEFAULT_PASSWORD}"
       configPassword: "${SECRET_DEFAULT_PASSWORD}"
-    openldap:
-      secretName: openldap
     service:
       type: LoadBalancer
       annotations:
