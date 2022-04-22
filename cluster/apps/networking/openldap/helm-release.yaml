@@ -33,6 +33,8 @@ spec:
     env:
       LDAP_ORGANISATION: "${SECRET_DOMAIN}"
       LDAP_BASE_DN: "${LDAP_BASE_DN}"
+    customTLS:
+      enabled: false
     ltb-passwd:
       enabled: false
     phpldapadmin:
