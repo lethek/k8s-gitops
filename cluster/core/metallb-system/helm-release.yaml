@@ -25,13 +25,9 @@ spec:
     configInline:
       address-pools:
         - name: default
-          protocol: layer2
-          addresses:
-            - "${METALLB_LB_RANGE}"
-        - name: bgp
           protocol: bgp
           addresses:
-            - "${METALLB_LB_RANGE_BGP}"
+            - "${METALLB_LB_RANGE}"
       peers:
         - peer-address: "${GATEWAY_ADDR}"
           peer-asn: 64512
