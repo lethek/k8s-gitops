@@ -18,6 +18,8 @@ spec:
   values:
     controller:
       kind: "DaemonSet"
+      ingressClassResource:
+        default: true
       publishService:
         enabled: true
       service:
