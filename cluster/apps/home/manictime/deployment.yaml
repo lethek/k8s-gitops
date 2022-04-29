@@ -7,7 +7,6 @@ metadata:
   labels:
     app.kubernetes.io/name: manictime
 spec:
-  serviceName: manictime
   selector:
     matchLabels:
       app: manictime

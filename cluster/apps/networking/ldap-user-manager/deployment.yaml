@@ -7,7 +7,6 @@ metadata:
   labels:
     app.kubernetes.io/name: ldap-user-manager
 spec:
-  serviceName: ldap-user-manager
   selector:
     matchLabels:
       app: ldap-user-manager
