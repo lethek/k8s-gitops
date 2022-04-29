@@ -40,7 +40,7 @@ spec:
       postgresPassword: "${SECRET_DEFAULT_PASSWORD}"
     ldap:
       enabled: true
-      server: openldap-openldap-stack-ha.networking.svc.cluster.local
+      server: openldap.networking.svc.cluster.local
       port: 389
       baseDN: "${LDAP_BASE_DN}"
       bindDN: "cn=admin,${LDAP_BASE_DN}"

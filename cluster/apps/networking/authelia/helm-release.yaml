@@ -68,7 +68,7 @@ spec:
         ldap:
           enabled: true
           implementation: custom
-          url: "ldap://openldap-openldap-stack-ha.networking.svc.cluster.local:389"
+          url: "ldap://openldap.networking.svc.cluster.local:389"
           base_dn: "${LDAP_BASE_DN}"
           user: "cn=admin,${LDAP_BASE_DN}"
           username_attribute: uid

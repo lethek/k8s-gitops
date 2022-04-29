@@ -69,7 +69,7 @@ spec:
         insecureNoSSL: true
         insecureSkipVerifySSL: true
         dashboardURL: "https://k10.${SECRET_DOMAIN}/k10"
-        host: "openldap-openldap-stack-ha.networking.svc.cluster.local:389"
+        host: "openldap.networking.svc.cluster.local:389"
         bindDN: "cn=admin,${LDAP_BASE_DN}"
         bindPW: "${SECRET_DEFAULT_PASSWORD}"
         userSearch:
