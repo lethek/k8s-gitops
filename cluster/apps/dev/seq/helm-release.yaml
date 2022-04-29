@@ -29,6 +29,9 @@ spec:
       ingressClassName: nginx
       annotations:
         kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/proxy-buffering: "on"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+        nginx.ingress.kubernetes.io/proxy-buffers-number: "4"        
         hajimari.io/enable: "true"
         hajimari.io/icon: "math-log"
       tls:
