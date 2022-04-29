@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smtp4dev
+  namespace: dev
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "${LB_SMTP4DEV_ADDR}"
+spec:
+  type: LoadBalancer
+  selector:
+    app: smtp4dev
+  ports:
+    - name: smtp
+      protocol: TCP
+      port: 25
+      targetPort: smtp
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+    - name: imap
+      protocol: TCP
+      port: 143
+      targetPort: imap
