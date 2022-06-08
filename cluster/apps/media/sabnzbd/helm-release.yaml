@@ -71,7 +71,6 @@ spec:
         existingClaim: nfs-shared-downloads-pvc
         accessMode: ReadWriteMany
         retain: true
-        subPath: usenet
     resources:
       requests:
         memory: 250Mi
