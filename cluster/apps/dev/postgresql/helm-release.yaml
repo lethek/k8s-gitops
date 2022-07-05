@@ -24,6 +24,7 @@ spec:
       persistence:
         enabled: true
         storageClass: longhorn
+        size: 20Gi
       service:
         type: LoadBalancer
         annotations:
