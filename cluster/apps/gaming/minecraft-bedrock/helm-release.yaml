@@ -39,4 +39,4 @@ spec:
       dataDir:
         enabled: true
         storageClass: longhorn
-        Size: 1Gi
+        Size: 5Gi
