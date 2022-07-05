@@ -12,7 +12,7 @@ resources:
   - harbor-charts.yaml
   - ingress-nginx-charts.yaml
   - jetstack-charts.yaml
-  - kasten-charts.yaml
+  #- kasten-charts.yaml
   - k8s-at-home-charts.yaml
   - longhorn-charts.yaml
   - metallb-charts.yaml
