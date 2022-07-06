@@ -37,6 +37,10 @@ spec:
 
             CREATE USER keycloak;
             CREATE DATABASE keycloak WITH OWNER = keycloak;
+
+            CREATE USER manictime;
+            CREATE DATABASE manictimecore WITH OWNER = manictime;
+            CREATE DATABASE manictimereports WITH OWNER = manictime;
     auth:
       postgresPassword: "${SECRET_DEFAULT_PASSWORD}"
     ldap:

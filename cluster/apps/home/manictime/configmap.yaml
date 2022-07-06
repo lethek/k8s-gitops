@@ -12,5 +12,15 @@ data:
           "addresses": [ "*" ],
           "networks": [ "*" ]
         }
-      }
+      },
+      "database": {
+        "provider": "PostgreSql",
+        "connectionString": "Host=postgresql.dev.svc.cluster.local; Port=5432; Database=manictimecore; SSL Mode=Prefer; User Id=manictime; Password=${SECRET_DEFAULT_PASSWORD};"
+      },
+      "reporting": {
+        "database": {
+          "provider": "PostgreSql",
+          "connectionString": "Host=postgresql.dev.svc.cluster.local; Port=5432; Database=manictimereports; SSL Mode=Prefer; User Id=manictime; Password=${SECRET_DEFAULT_PASSWORD};"
+        }
+      }      
     }
