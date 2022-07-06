@@ -86,6 +86,13 @@ spec:
         uid: keycloak
         userPassword: ${SECRET_DEFAULT_PASSWORD}
 
+        dn: uid=manictime,ou=Services,{{ LDAP_BASE_DN }}
+        objectClass: account
+        objectClass: simpleSecurityObject
+        objectClass: top
+        uid: manictime
+        userPassword: ${SECRET_DEFAULT_PASSWORD}
+
       03-default-groups.ldif: |-
         dn: cn=Admins,ou=Groups,{{ LDAP_BASE_DN }}
         objectClass: groupOfUniqueNames
