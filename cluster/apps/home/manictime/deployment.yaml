@@ -30,8 +30,8 @@ spec:
             - name: ADMIN_PASSWORD
               value: "${SECRET_DEFAULT_PASSWORD}"
           volumeMounts:
-            # - name: manictime-data
-            #   mountPath: /app/Data
+            - name: manictime-data
+              mountPath: /app/Data
             - name: manictime-config
               mountPath: /app/Data/ManicTimeServerSettings.json
               subPath: ManicTimeServerSettings.json
@@ -47,15 +47,15 @@ spec:
             - containerPort: 8080
               name: manictime
           volumeMounts:
-            # - name: manictime-data
-            #   mountPath: /app/Data
+            - name: manictime-data
+              mountPath: /app/Data
             - name: manictime-config
               mountPath: /app/Data/ManicTimeServerSettings.json
               subPath: ManicTimeServerSettings.json
       volumes:
-        # - name: manictime-data
-        #   persistentVolumeClaim:
-        #     claimName: manictime-data
+        - name: manictime-data
+          persistentVolumeClaim:
+            claimName: manictime-data
         - name: manictime-config
           configMap:
             name: manictime-config
