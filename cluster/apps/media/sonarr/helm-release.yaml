@@ -21,6 +21,7 @@ spec:
       tag: v3.0.8.1507
     env:
       TZ: "${DEFAULT_TIMEZONE}"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568

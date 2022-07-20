@@ -20,6 +20,7 @@ spec:
       tag: 2021.12.12
     env:
       TZ: "${DEFAULT_TIMEZONE}"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
     ingress:
       main:
         enabled: true
