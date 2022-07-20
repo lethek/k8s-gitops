@@ -105,6 +105,7 @@ spec:
               - prometheus.${SECRET_DOMAIN}
               - longhorn.${SECRET_DOMAIN}
               - k10.${SECRET_DOMAIN}
+              - emy.${SECRET_DOMAIN}
               - "code-*.${SECRET_DOMAIN}"
             subject: ["group:Users"]
             policy: deny

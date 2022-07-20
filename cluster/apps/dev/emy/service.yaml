@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emy
+  namespace: dev
+spec:
+  type: ClusterIP
+  selector:
+    app: emy
+  ports:
+  - name: api
+    port: 3399
+    targetPort: api
+  - name: admin
+    port: 3340
+    targetPort: admin
