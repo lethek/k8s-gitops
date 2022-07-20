@@ -29,6 +29,8 @@ spec:
               value: "${SECRET_DEFAULT_EMAIL}"
             - name: ADMIN_PASSWORD
               value: "${SECRET_DEFAULT_PASSWORD}"
+            - name: DOTNET_USE_POLLING_FILE_WATCHER
+              value: "true"
           volumeMounts:
             - name: manictime-data
               mountPath: /app/Data
@@ -38,6 +40,9 @@ spec:
       containers:
         - name: manictime
           image: manictime/manictimeserver:5.1.1
+          env:
+            - name: DOTNET_USE_POLLING_FILE_WATCHER
+              value: "true"
           resources:
             requests:
               cpu: 100m
