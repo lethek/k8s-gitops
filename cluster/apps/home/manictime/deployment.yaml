@@ -20,7 +20,7 @@ spec:
     spec:
       initContainers:
         - name: manictime-init
-          image: manictime/manictimeserver:5.0.4
+          image: manictime/manictimeserver:5.1.1
           command: [ "/bin/sh" ]
           args:
             - -c
@@ -42,7 +42,7 @@ spec:
               subPath: ManicTimeServerSettings.json
       containers:
         - name: manictime
-          image: manictime/manictimeserver:5.0.4
+          image: manictime/manictimeserver:5.1.1
           env:
             - name: DOTNET_USE_POLLING_FILE_WATCHER
               value: "true"
