@@ -112,12 +112,12 @@ spec:
           - secretName: "hajimari-tls"
             hosts:
               - "hajimari.${SECRET_DOMAIN}"
-    persistence:
-      data:
-        enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteMany
-        size: "10Mi"
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     storageClass: longhorn
+    #     accessMode: ReadWriteMany
+    #     size: "10Mi"
     podAnnotations:
       configmap.reloader.stakater.com/reload: "hajimari-settings"
     resources:
