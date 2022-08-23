@@ -17,7 +17,7 @@ spec:
   values:
     minecraftServer:
       eula: true
-      whitelistUsers: lethek
+      whitelist: lethek
       ops: lethek
       #members: "2535416769346406"
       defaultPermission: member
