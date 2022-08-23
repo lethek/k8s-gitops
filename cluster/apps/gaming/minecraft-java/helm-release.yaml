@@ -16,10 +16,11 @@ spec:
         namespace: flux-system
   values:
     extraEnv:
-      ENABLE_WHITELIST: true
-      ENFORCE_WHITELIST: true
+      ENABLE_WHITELIST: "true"
+      ENFORCE_WHITELIST: "true"
     minecraftServer:
       eula: true
+      version: LATEST
       overrideServerProperties: true
       whitelist: lethek
       ops: lethek
