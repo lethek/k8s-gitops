@@ -18,8 +18,8 @@ spec:
     minecraftServer:
       eula: true
       whitelist: true
-      whitelistUsers: lethek,M4Xinfinity,KeyMeteor680060,Sharon XZhu
-      ops: "2533274842615946,2535416769346406,2535409636930282"
+      whitelistUsers: lethek
+      ops: lethek
       #members: "2535416769346406"
       defaultPermission: member
       onlineMode: true
