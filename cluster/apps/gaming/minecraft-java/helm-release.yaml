@@ -15,12 +15,9 @@ spec:
         name: minecraft-server-charts
         namespace: flux-system
   values:
-    extraEnv:
-      ENABLE_WHITELIST: "true"
-      ENFORCE_WHITELIST: "true"
     minecraftServer:
-      eula: true
-      version: LATEST
+      eula: "TRUE"
+      version: "LATEST"
       overrideServerProperties: true
       whitelist: lethek
       ops: lethek
@@ -38,6 +35,10 @@ spec:
       cheats: false
       serviceType: LoadBalancer
       loadBalancerIP: "${LB_MINECRAFT_JE_ADDR}"
+    extraEnv:
+      ENABLE_ROLLING_LOGS: "true"
+      ENABLE_WHITELIST: "true"
+      ENFORCE_WHITELIST: "true"
     # persistence:
     #   dataDir:
     #     enabled: true
