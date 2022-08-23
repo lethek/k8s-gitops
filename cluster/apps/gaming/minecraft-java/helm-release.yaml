@@ -15,11 +15,12 @@ spec:
         name: minecraft-server-charts
         namespace: flux-system
   values:
+    extraEnv:
+      ENFORCE_WHITELIST: "TRUE"
     minecraftServer:
       eula: true
       whitelist: lethek
       ops: lethek
-      #members: "2535416769346406"
       defaultPermission: member
       onlineMode: true
       playerIdleTimeout: 30
