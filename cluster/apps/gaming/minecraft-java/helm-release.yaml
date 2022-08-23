@@ -51,8 +51,8 @@ spec:
       serviceType: LoadBalancer
       memory: 2048M
       loadBalancerIP: "${LB_MINECRAFT_JE_ADDR}"
-    # persistence:
-    #   dataDir:
-    #     enabled: true
-    #     storageClass: longhorn
-    #     Size: 5Gi
+    persistence:
+      dataDir:
+        enabled: true
+        storageClass: longhorn
+        Size: 5Gi
