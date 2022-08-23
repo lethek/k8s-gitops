@@ -35,8 +35,8 @@ spec:
       cheats: false
       serviceType: LoadBalancer
       loadBalancerIP: "${LB_MINECRAFT_ADDR}"
-    persistence:
-      dataDir:
-        enabled: true
-        storageClass: longhorn
-        Size: 5Gi
+    # persistence:
+    #   dataDir:
+    #     enabled: true
+    #     storageClass: longhorn
+    #     Size: 5Gi
