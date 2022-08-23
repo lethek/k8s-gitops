@@ -17,6 +17,7 @@ spec:
   values:
     minecraftServer:
       eula: "TRUE"
+      type: "VANILLA"
       version: "LATEST"
       overrideServerProperties: true
       whitelist: lethek
@@ -34,11 +35,12 @@ spec:
       gameMode: survival
       cheats: false
       serviceType: LoadBalancer
+      memory: 2048M
       loadBalancerIP: "${LB_MINECRAFT_JE_ADDR}"
-    extraEnv:
-      ENABLE_ROLLING_LOGS: "true"
-      ENABLE_WHITELIST: "true"
-      ENFORCE_WHITELIST: "true"
+    # extraEnv:
+    #   ENABLE_ROLLING_LOGS: "true"
+    #   ENABLE_WHITELIST: "true"
+    #   ENFORCE_WHITELIST: "true"
     # persistence:
     #   dataDir:
     #     enabled: true
