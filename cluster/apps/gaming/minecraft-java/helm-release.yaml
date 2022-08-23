@@ -23,7 +23,7 @@ spec:
       ops: lethek
       defaultPermission: member
       onlineMode: true
-      playerIdleTimeout: 30
+      playerIdleTimeout: 0
       maxPlayers: 10
       tickDistance: 4
       viewDistance: 20
@@ -34,7 +34,7 @@ spec:
       gameMode: survival
       cheats: false
       serviceType: LoadBalancer
-      loadBalancerIP: "${LB_MINECRAFT_ADDR}"
+      loadBalancerIP: "${LB_MINECRAFT_JE_ADDR}"
     # persistence:
     #   dataDir:
     #     enabled: true

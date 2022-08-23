@@ -23,7 +23,7 @@ spec:
       members: "2533274915833320"
       defaultPermission: member
       onlineMode: true
-      playerIdleTimeout: 30
+      playerIdleTimeout: 0
       maxPlayers: 10
       tickDistance: 4
       viewDistance: 10
@@ -34,7 +34,7 @@ spec:
       gameMode: survival
       cheats: true
       serviceType: LoadBalancer
-      loadBalancerIP: "${LB_MINECRAFT_ADDR}"
+      loadBalancerIP: "${LB_MINECRAFT_BE_ADDR}"
     persistence:
       dataDir:
         enabled: true
