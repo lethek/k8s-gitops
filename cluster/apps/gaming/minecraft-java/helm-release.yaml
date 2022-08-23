@@ -25,13 +25,17 @@ spec:
       limits:
         memory: 4Gi
         cpu: 3000m
+    extraEnv:
+      ENABLE_ROLLING_LOGS: "TRUE"
+      ENABLE_WHITELIST: "TRUE"
+      ENFORCE_WHITELIST: "TRUE"
     minecraftServer:
       eula: "TRUE"
       type: "VANILLA"
       version: "LATEST"
       overrideServerProperties: true
-      whitelist: lethek
-      ops: lethek
+      whitelist: lethek,lthk
+      ops: lethek,lthk
       defaultPermission: member
       onlineMode: true
       playerIdleTimeout: 0
@@ -47,10 +51,6 @@ spec:
       serviceType: LoadBalancer
       memory: 2048M
       loadBalancerIP: "${LB_MINECRAFT_JE_ADDR}"
-    extraEnv:
-      ENABLE_ROLLING_LOGS: "TRUE"
-      ENABLE_WHITELIST: "TRUE"
-      ENFORCE_WHITELIST: "TRUE"
     # persistence:
     #   dataDir:
     #     enabled: true
