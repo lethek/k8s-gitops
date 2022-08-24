@@ -53,6 +53,7 @@ spec:
         database:
           storageClass: longhorn
           accessMode: ReadWriteMany
+          size: 5Gi
         redis:
           storageClass: longhorn
           accessMode: ReadWriteMany
