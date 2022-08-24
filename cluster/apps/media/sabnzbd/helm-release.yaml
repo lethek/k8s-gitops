@@ -64,7 +64,7 @@ spec:
         enabled: true
         storageClass: longhorn
         accessMode: ReadWriteOnce
-        size: "100Mi"
+        size: "1Gi"
         retain: true
       downloads:
         enabled: true
