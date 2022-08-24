@@ -20,11 +20,10 @@ spec:
       tag: 2022.11.0
     resources:
       requests:
-        memory: 2Gi
-        cpu: 1500m
+        memory: 1Gi
+        cpu: 1000m
       limits:
         memory: 4Gi
-        cpu: 3000m
     extraEnv:
       ENABLE_ROLLING_LOGS: "TRUE"
       ENABLE_WHITELIST: "TRUE"
@@ -41,7 +40,7 @@ spec:
       playerIdleTimeout: 0
       maxPlayers: 10
       tickDistance: 4
-      viewDistance: 20
+      viewDistance: 10
       serverName: SMMX
       levelName: Survival
       levelType: DEFAULT
@@ -49,7 +48,7 @@ spec:
       gameMode: survival
       cheats: false
       serviceType: LoadBalancer
-      memory: 2048M
+      #memory: 2048M
       loadBalancerIP: "${LB_MINECRAFT_JE_ADDR}"
     persistence:
       dataDir:
