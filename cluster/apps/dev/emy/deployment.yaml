@@ -21,7 +21,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: emy
-          image: addictedcs/soundfingerprinting.emy:8.14.4-community
+          image: addictedcs/soundfingerprinting.emy:8.14.6-community
           env:
             - name: DOTNET_USE_POLLING_FILE_WATCHER
               value: "true"
