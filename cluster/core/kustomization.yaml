@@ -5,5 +5,5 @@ resources:
   - cert-manager
   - kube-system
   - longhorn-system
-  #- metallb-system
+  - metallb-system
   - system-upgrade
