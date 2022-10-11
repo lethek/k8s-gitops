@@ -4,14 +4,18 @@ kind: Service
 metadata:
   name: emy
   namespace: dev
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "${LB_EMY_ADDR}"
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: emy
   ports:
   - name: api
+    protocol: TCP
     port: 3399
     targetPort: api
   - name: admin
+    protocol: TCP
     port: 3340
     targetPort: admin
