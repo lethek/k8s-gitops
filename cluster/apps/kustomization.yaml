@@ -7,9 +7,9 @@ resources:
   - gaming
   - home
   - ingress-nginx
-  #- kasten-io
   - kube-system
   - media
+  - metallb-system
   - networking
   - system-upgrade
   - test

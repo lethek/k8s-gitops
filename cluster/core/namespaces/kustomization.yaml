@@ -6,7 +6,6 @@ resources:
   - gaming.yaml
   - home.yaml
   - ingress-nginx.yaml
-  - kasten-io.yaml
   - longhorn-system.yaml
   - media.yaml
   - metallb-system.yaml
