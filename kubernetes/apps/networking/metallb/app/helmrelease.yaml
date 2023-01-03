@@ -8,13 +8,8 @@ spec:
   interval: 15m
   chart:
     spec:
-<<<<<<< HEAD:cluster/apps/kube-system/reloader/helm-release.yaml
-      chart: reloader
-      version: v0.0.124
-=======
       chart: metallb
       version: 0.13.7
->>>>>>> remotes/template/main:kubernetes/apps/networking/metallb/app/helmrelease.yaml
       sourceRef:
         kind: HelmRepository
         name: metallb
