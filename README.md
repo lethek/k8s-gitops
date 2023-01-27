@@ -33,14 +33,14 @@ _Additional applications include [hajimari](https://github.com/toboshii/hajimari
 
 For provisioning the following tools will be used:
 
-- [Fedora 36 Server](https://getfedora.org/en/server/download/) - Universal operating system that supports running all kinds of home related workloads in Kubernetes and has a faster release cycle
-- [Ubuntu 22.04 Server](https://ubuntu.com/download/server) - Alternative operating system, limited community support
-- [Ansible](https://www.ansible.com) - Provision Fedora Server and install k3s
-- [Terraform](https://www.terraform.io) - Provision an already existing Cloudflare domain and certain DNS records to be used with your k3s cluster
+- [Ansible](https://www.ansible.com) - Sets up the operating system and installs k3s
+- [Terraform](https://www.terraform.io) - Provisions an existing Cloudflare domain and certain DNS records to be used with your Kubernetes cluster
 
 ## 📝 Prerequisites
 
 **Note:** _This template has not been tested on cloud providers like AWS EC2, Hetzner, Scaleway etc... Those cloud offerings probably have a better way of provsioning a Kubernetes cluster and it's advisable to use those instead of the Ansible playbooks included here. This repository can still be tweaked for the GitOps/Flux portion if there's a cluster working in one those environments._
+
+First and foremost some experience in debugging/troubleshooting problems **and a positive attitude is required** ;)
 
 ### 📚 Reading material
 
@@ -48,33 +48,54 @@ For provisioning the following tools will be used:
 
 ### 💻 Systems
 
-- One or more nodes with a fresh install of [Fedora Server 36](https://getfedora.org/en/server/download/).
+- One or more nodes with a fresh install of [Fedora Server 36](https://getfedora.org/en/server/download/) or [Ubuntu 22.04 Server](https://ubuntu.com/download/server).
   - These nodes can be ARM64/AMD64 bare metal or VMs.
   - An odd number of control plane nodes, greater than or equal to 3 is required if deploying more than one control plane node.
 - A [Cloudflare](https://www.cloudflare.com/) account with a domain, this will be managed by Terraform and external-dns. You can [register new domains](https://www.cloudflare.com/products/registrar/) directly thru Cloudflare.
-- Some experience in debugging problems and a positive attitude ;)
 
 📍 It is recommended to have 3 master nodes for a highly available control plane.
+
+## 📂 Repository structure
+
+The Git repository contains the following directories under `kubernetes` and are ordered below by how Flux will apply them.
+
+```sh
+📁 kubernetes      # Kubernetes cluster defined as code
+├─📁 bootstrap     # Flux installation
+├─📁 flux          # Main Flux configuration of repository
+└─📁 apps          # Apps deployed into the cluster grouped by namespace
+```
+
+## 🚀 Lets go
+
+Very first step will be to create a new **public** repository by clicking the big green **Use this template** button on this page.
+
+Clone **your new repo** to you local workstation and `cd` into it.
+
+📍 **All of the below commands** are run on your **local** workstation, **not** on any of your cluster nodes.
 
 ### 🔧 Workstation Tools
 
 📍 Install the **most recent version** of the CLI tools below. If you are **having trouble with future steps**, it is very likely you don't have the most recent version of these CLI tools, **!especially sops AND yq!**.
 
-1. Install the following CLI tools on your workstation, if you are using [Homebrew](https://brew.sh/) on MacOS or Linux skip to steps 3 and 4.
+1. Install the following CLI tools on your workstation, if you are **NOT** using [Homebrew](https://brew.sh/) on MacOS or Linux **ignore** steps 4 and 5.
 
-    * Required: [age](https://github.com/FiloSottile/age), [ansible](https://www.ansible.com), [flux](https://toolkit.fluxcd.io/), [weave-gitops](https://docs.gitops.weave.works/docs/installation/weave-gitops/), [go-task](https://github.com/go-task/task), [ipcalc](http://jodies.de/ipcalc), [jq](https://stedolan.github.io/jq/), [kubectl](https://kubernetes.io/docs/tasks/tools/), [pre-commit](https://github.com/pre-commit/pre-commit), [sops](https://github.com/mozilla/sops), [terraform](https://www.terraform.io), [yq v4](https://github.com/mikefarah/yq)
+    * Required: [age](https://github.com/FiloSottile/age), [ansible](https://www.ansible.com), [flux](https://toolkit.fluxcd.io/), [weave-gitops](https://docs.gitops.weave.works/docs/installation/weave-gitops/), [go-task](https://github.com/go-task/task), [direnv](https://github.com/direnv/direnv), [ipcalc](http://jodies.de/ipcalc), [jq](https://stedolan.github.io/jq/), [kubectl](https://kubernetes.io/docs/tasks/tools/), [python-pip3](https://pypi.org/project/pip/), [pre-commit](https://github.com/pre-commit/pre-commit), [sops v3](https://github.com/mozilla/sops), [terraform](https://www.terraform.io), [yq v4](https://github.com/mikefarah/yq)
 
-    * Recommended: [direnv](https://github.com/direnv/direnv), [helm](https://helm.sh/), [kustomize](https://github.com/kubernetes-sigs/kustomize), [prettier](https://github.com/prettier/prettier), [stern](https://github.com/stern/stern), [yamllint](https://github.com/adrienverge/yamllint)
+    * Recommended: [helm](https://helm.sh/), [kustomize](https://github.com/kubernetes-sigs/kustomize), [stern](https://github.com/stern/stern), [yamllint](https://github.com/adrienverge/yamllint)
 
 2. This guide heavily relies on [go-task](https://github.com/go-task/task) as a framework for setting things up. It is advised to learn and understand the commands it is running under the hood.
 
-3. Install [go-task](https://github.com/go-task/task) via Brew
+3. Install Python 3 and pip3 using your Linux OS package manager, or Homebrew if using MacOS.
+    - Ensure `pip3` is working on your command line by running `pip3 --version`
+
+4. [Homebrew] Install [go-task](https://github.com/go-task/task)
 
     ```sh
     brew install go-task/tap/go-task
     ```
 
-4. Install workstation dependencies via Brew
+5. [Homebrew] Install workstation dependencies
 
     ```sh
     task init
@@ -95,25 +116,6 @@ It is advisable to install [pre-commit](https://pre-commit.com/) and the pre-com
     ```sh
     task precommit:update
     ```
-
-## 📂 Repository structure
-
-The Git repository contains the following directories under `kubernetes` and are ordered below by how Flux will apply them.
-
-```sh
-📁 kubernetes      # Kubernetes cluster defined as code
-├─📁 bootstrap     # Flux installation
-├─📁 flux          # Main Flux configuration of repository
-└─📁 apps          # Apps deployed into the cluster grouped by namespace
-```
-
-## 🚀 Lets go
-
-Very first step will be to create a new repository by clicking the **Use this template** button on this page.
-
-Clone the repo to you local workstation and `cd` into it.
-
-📍 **All of the below commands** are run on your **local** workstation, **not** on any of your cluster nodes.
 
 ### 🔐 Setting up Age
 
@@ -139,7 +141,7 @@ Clone the repo to you local workstation and `cd` into it.
     source ~/.bashrc
     ```
 
-4. Fill out the Age public key in the `.config.env` under `BOOTSTRAP_AGE_PUBLIC_KEY`, **note** the public key should start with `age`...
+4. Fill out the Age public key in the appropriate variable in configuration section below, **note** the public key should start with `age`...
 
 ### ☁️ Global Cloudflare API Key
 
@@ -149,7 +151,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 
 2. Under the `API Keys` section, create a global API Key.
 
-3. Use the API Key in the configuration section below.
+3. Use the API Key in the appropriate variable in configuration section below.
 
 📍 You may wish to update this later on to a Cloudflare **API Token** which can be scoped to certain resources. I do not recommend using a Cloudflare **API Key**, however for the purposes of this template it is easier getting started without having to define which scopes and resources are needed. For more information see the [Cloudflare docs on API Keys and Tokens](https://developers.cloudflare.com/api/).
 
@@ -177,11 +179,11 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
     task configure
     ```
 
-### ⚡ Preparing Fedora Server with Ansible
+### ⚡ Preparing Fedora or Ubuntu Server with Ansible
 
-📍 Here we will be running a Ansible Playbook to prepare Fedora Server for running a Kubernetes cluster.
+📍 Here we will be running a Ansible Playbook to prepare Fedora or Ubuntu Server for running a Kubernetes cluster.
 
-📍 Nodes are not security hardened by default, you can do this with [dev-sec/ansible-collection-hardening](https://github.com/dev-sec/ansible-collection-hardening) or similar if it supports Fedora Server.
+📍 Nodes are not security hardened by default, you can do this with [dev-sec/ansible-collection-hardening](https://github.com/dev-sec/ansible-collection-hardening) or similar if supported. This is an advanced configuration and generally not recommended unless you want to [DevSecOps](https://www.ibm.com/topics/devsecops) your cluster and nodes.
 
 1. Ensure you are able to SSH into your nodes from your workstation using a private SSH key **without a passphrase**. This is how Ansible is able to connect to your remote nodes.
 
@@ -205,16 +207,16 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
     task ansible:ping
     ```
 
-5. Run the Fedora Server Ansible prepare playbook
+5. Run the Fedora/Ubuntu Server Ansible prepare playbook
 
     ```sh
     task ansible:prepare
     ```
 
-6. Reboot the nodes
+6. Reboot the nodes (if not done in step 5)
 
     ```sh
-    task ansible:reboot
+    task ansible:force-reboot
     ```
 
 ### ⛵ Installing k3s with Ansible
@@ -381,6 +383,10 @@ task cluster:resources
 
 ## 📣 Post installation
 
+### 🌱 Environment
+
+[direnv](https://direnv.net/) will make it so anytime you `cd` to your repo's directory it export the required environment variables (e.g. `KUBECONFIG`). To set this up make sure you [hook it into your shell](https://direnv.net/docs/hook.html) and after that is done, run `direnv allow` while in your repos directory.
+
 ### 🌐 DNS
 
 📍 The [external-dns](https://github.com/kubernetes-sigs/external-dns) application created in the `kube-system` namespace will handle creating public DNS records. By default, `echo-server` is the only public domain exposed on your Cloudflare domain. In order to make additional applications public you must set an ingress annotation like in the `HelmRelease` for `echo-server`. You do not need to use Terraform to create additional DNS records unless you need a record outside the purposes of your Kubernetes cluster (e.g. setting up MX records).
@@ -394,12 +400,6 @@ If your router (or Pi-Hole, Adguard Home or whatever) supports conditional DNS f
 To access services from the outside world port forwarded `80` and `443` in your router to the `${BOOTSTRAP_METALLB_INGRESS_ADDR}` IP, in a few moments head over to your browser and you _should_ be able to access `https://echo-server.${BOOTSTRAP_CLOUDFLARE_DOMAIN}` from a device outside your LAN.
 
 Now if nothing is working, that is expected. This is DNS after all!
-
-### 🔐 SSL
-
-By default in this template Kubernetes ingresses are set to use the [Let's Encrypt Staging Environment](https://letsencrypt.org/docs/staging-environment/). This will hopefully reduce issues from ACME on requesting certificates until you are ready to use this in "Production".
-
-Once you have confirmed there are no issues requesting your certificates replace `letsencrypt-staging` with `letsencrypt-production` in your ingress annotations for `cert-manager.io/cluster-issuer`
 
 ### 🤖 Renovatebot
 
@@ -416,7 +416,7 @@ Flux is pull-based by design meaning it will periodically check your git reposit
 1. Webhook URL - Your webhook receiver will be deployed on `https://flux-webhook.${BOOTSTRAP_CLOUDFLARE_DOMAIN}/hook/:hookId`. In order to find out your hook id you can run the following command:
 
     ```sh
-    kubectl -n flux-system get receiver/github-receiver --kubeconfig=./kubeconfig
+    kubectl -n flux-system get receiver/github-receiver
     # NAME              AGE    READY   STATUS
     # github-receiver   6h8m   True    Receiver initialized with URL: /hook/12ebd1e363c641dc3c2e430ecf3cee2b3c7a5ac9e1234506f6f5f3ce1230e123
     ```
@@ -528,7 +528,7 @@ The benefits of a public repository include:
 Included in your cluster is the [Kubernetes Dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/). Inorder to log into this you will have to get the secret token from the cluster using the command below.
 
 ```sh
-kubectl -n monitoring get secret kubernetes-dashboard -o jsonpath='{.data.token}'
+kubectl -n monitoring get secret kubernetes-dashboard -o jsonpath='{.data.token}' | base64 -d
 ```
 
 You should be able to access the dashboard at `https://kubernetes.${SECRET_DOMAIN}`

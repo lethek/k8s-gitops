@@ -14,13 +14,17 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  maxHistory: 3
   install:
     createNamespace: true
     remediation:
       retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   values:
     controller:
       type: cronjob
@@ -30,7 +34,7 @@ spec:
     restartPolicy: OnFailure
     image:
       repository: ghcr.io/onedr0p/kubernetes-kubectl
-      tag: 1.26.0@sha256:0e4be5e6ba3dbb0f12896796da78988136460bb6f027d79e51300a19a021c92a
+      tag: 1.26.1@sha256:c85224928b2e384e63bd8c9ba89753dd3d1cd9c178350d83efa3182b480c31a0
     command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
     envFrom:
       - secretRef:
