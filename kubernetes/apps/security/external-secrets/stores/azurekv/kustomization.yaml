@@ -5,3 +5,4 @@ namespace: security
 resources:
   - ./secret.sops.yaml
   - ./clustersecretstore.yaml
+  - ./example-secret.yaml
