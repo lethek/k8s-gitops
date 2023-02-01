@@ -5,6 +5,7 @@ metadata:
   name: unifi
   namespace: networking
   annotations:
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/configuration-snippet: |
