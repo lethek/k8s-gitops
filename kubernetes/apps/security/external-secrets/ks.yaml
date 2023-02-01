@@ -27,13 +27,13 @@ metadata:
   name: cluster-apps-external-secrets-stores
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-apps-external-secrets
   path: ./kubernetes/apps/security/external-secrets/stores
   prune: true
   sourceRef:
     kind: GitRepository
-    name: k8s-home-ops
+    name: home-kubernetes
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+  dependsOn:
+    - name: cluster-apps-external-secrets
