@@ -6,7 +6,7 @@ metadata:
   namespace: networking
 subsets:
   - addresses:
-      - ip: ${UNIFI_SERVICE_ADDR}
+      - ip: ${EXTERNAL_UNIFI_ADDR}
     ports:
       - name: https
         port: 443

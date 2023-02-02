@@ -6,7 +6,7 @@ metadata:
   namespace: networking
 subsets:
   - addresses:
-      - ip: ${NAS_SERVICE_ADDR}
+      - ip: ${EXTERNAL_NAS_ADDR}
     ports:
       - name: https
         port: 5001
