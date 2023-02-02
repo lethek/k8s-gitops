@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: nas
+  namespace: networking
+subsets:
+  - addresses:
+      - ip: ${NAS_SERVICE_ADDR}
+    ports:
+      - name: https
+        port: 5001
+        protocol: TCP
