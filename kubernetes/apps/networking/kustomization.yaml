@@ -10,3 +10,4 @@ resources:
   - ./metallb/ks.yaml
   - ./unifi/ks.yaml
   - ./nas/ks.yaml
+  - ./emby/ks.yaml
