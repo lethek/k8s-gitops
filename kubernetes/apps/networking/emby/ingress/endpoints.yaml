@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: emby
+  namespace: networking
+subsets:
+  - addresses:
+      - ip: ${EXTERNAL_PLEX_ADDR}
+    ports:
+      - name: emby
+        protocol: TCP
+        port: 8096

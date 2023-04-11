@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: emby
+  namespace: networking
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - emby.${SECRET_DOMAIN}
+  rules:
+    - host: emby.${SECRET_DOMAIN}
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: emby
+                port:
+                  number: 8096
