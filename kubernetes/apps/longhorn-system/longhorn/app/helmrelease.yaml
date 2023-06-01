@@ -1,0 +1,51 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app longhorn
+  namespace: longhorn-system
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: longhorn
+      version: 1.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    csi:
+      kubeletRootDir: /var/lib/kubelet
+    persistence:
+      reclaimPolicy: Delete
+      defaultClassReplicaCount: 2
+      defaultClass: true
+    defaultSettings:
+      storageMinimalAvailablePercentage: 10
+      # backupTarget: nfs://${SVC_NAS_ADDR}:/volume1/backups/longhorn
+      # backupstorePollInterval: 1800
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      defaultDataLocality: best-effort
+    # ingress:
+    #   enabled: true
+    #   ingressClassName: "nginx"
+    #   host: "longhorn.${SECRET_DOMAIN}"
+    #   tls: true
+    #   tlsSecret: longhorn-tls
+    #   annotations:
+    #     kubernetes.io/tls-acme: "true"
+    #     cert-manager.io/cluster-issuer: letsencrypt-production
+    #     nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    #     nginx.ingress.kubernetes.io/auth-url: "http://authelia.networking.svc.cluster.local/api/verify"
+    #     nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_DOMAIN}"
+    #     hajimari.io/enable: "true"
+    #     hajimari.io/icon: "harddisk"
+    #     hajimari.io/appName: "Longhorn"
